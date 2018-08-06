@@ -9,7 +9,7 @@ module "shared-vault" {
   product_group_object_id = "be8b3850-998a-4a66-8578-da268b8abd6b"
 }
 
-output "vaultName" {
+output "key_vault_name" {
   value = "${module.shared-vault.key_vault_name}"
 }
 
