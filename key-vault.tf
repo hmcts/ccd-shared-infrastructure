@@ -22,10 +22,10 @@ module "user-profile-vault" {
   product_group_object_id = "be8b3850-998a-4a66-8578-da268b8abd6b"
 }
 
-output "key_vault_name" {
+output "vaultName" {
   value = "${module.shared-vault.key_vault_name}"
 }
 
-output "key_vault_uri" {
+output "vaultUri" {
   value = "${module.shared-vault.key_vault_uri}"
 }
