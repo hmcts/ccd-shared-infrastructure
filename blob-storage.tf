@@ -1,5 +1,5 @@
 resource "azurerm_storage_account" "storage" {
-  name = "dm-store-blob-${var.env}"
+  name = "dm-store-blob${var.env}"
   resource_group_name = "${var.product}-shared-${var.env}"
   location = "${var.location}"
   account_tier = "Standard"
