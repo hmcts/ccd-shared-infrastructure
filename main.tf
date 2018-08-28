@@ -1,3 +1,12 @@
+locals {
+  ase_name = "core-compute-${var.env}"
+
+  common_tags = {
+    team_name    = "${var.team_name}"
+    team_contact = "${var.team_contact}"
+  }
+}
+
 // Shared Resource Group
 resource "azurerm_resource_group" "rg" {
   name     = "${var.product}-shared-${var.env}"
