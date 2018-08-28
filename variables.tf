@@ -1,15 +1,19 @@
+//SHARED VARIABLES
 variable "product" {
   type = "string"
+  description = "The name of your application"
   default = "ccd"
-}
-
-variable "location" {
-  type    = "string"
-  default = "UK South"
 }
 
 variable "env" {
   type = "string"
+  description = "The deployment environment (sandbox, aat, prod etc..)"
+}
+
+variable "location" {
+  type    = "string"
+  description = "The location where you would like to deploy your infrastructure"
+  default = "UK South"
 }
 
 variable "tenant_id" {
