@@ -5,6 +5,10 @@ resource "azurerm_storage_account" "storage" {
   account_tier = "Standard"
   account_replication_type = "LRS"
   account_kind = "StorageV2"
+  access_tier = "Hot"
+  enable_blob_encryption    = true
+  enable_file_encryption    = true
+  enable_https_traffic_only = true
 
   tags {
     environment = "${var.env}"
