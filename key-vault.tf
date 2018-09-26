@@ -9,6 +9,14 @@ module "vault" {
   product_group_object_id = "be8b3850-998a-4a66-8578-da268b8abd6b"
 }
 
+resource "azurerm_management_lock" "vault" {
+  count      = 1
+  name       = "resource-vault"
+  scope      = "${module.vault.key_vault_id}"
+  lock_level = "CanNotDelete"
+  notes      = "Lock vault as it is needed by other apps."
+}
+
 output "vaultName" {
   value = "${module.vault.key_vault_name}"
 }
