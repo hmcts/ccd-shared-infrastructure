@@ -7,8 +7,9 @@ import uk.gov.hmcts.contino.Environment
 Environment environment = new Environment(env)
 
 onMaster {
-  enableSlackNotifications('#ccd-master-builds')
-  sharedInfrastructurePipeline('ccd', environment.nonProdName, 'nonprod')
+  sharedInfrastructurePipeline('ccd', environment.nonProdName, 'nonprod') {
+    enableSlackNotifications('#ccd-master-builds')
+  }
   sharedInfrastructurePipeline('ccd', environment.demoName, 'nonprod')
   sharedInfrastructurePipeline('ccd', environment.prodName, 'prod')
 }
