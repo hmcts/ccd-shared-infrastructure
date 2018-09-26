@@ -9,4 +9,5 @@ properties([
 		])
 ])
 
+enableSlackNotifications('#ccd-param-builds')
 sharedInfrastructurePipeline('ccd', params.ENVIRONMENT, 'sandbox')
