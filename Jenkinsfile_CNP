@@ -6,10 +6,16 @@ import uk.gov.hmcts.contino.Environment
 
 Environment environment = new Environment(env)
 
+slackChannel = "#ccd-master-builds"
+
 onMaster {
-  sharedInfrastructurePipeline('ccd', environment.nonProdName, 'nonprod') {
-    enableSlackNotifications('#ccd-master-builds')
-  }
-  sharedInfrastructurePipeline('ccd', environment.demoName, 'nonprod')
-  sharedInfrastructurePipeline('ccd', environment.prodName, 'prod')
+    try {
+        sharedInfrastructurePipeline('ccd', environment.nonProdName, 'nonprod')
+        sharedInfrastructurePipeline('ccd', environment.demoName, 'nonprod')
+        sharedInfrastructurePipeline('ccd', environment.prodName, 'prod')
+        notifyBuildFixed channel: slackChannel
+    } catch (err) {
+        notifyBuildFailure channel: slackChannel
+        throw err
+    }
 }
