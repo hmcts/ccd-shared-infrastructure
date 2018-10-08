@@ -36,7 +36,7 @@ variable "asp_capacity" {
 variable "team_name" {
   type        = "string"
   description = "The name of your team"
-  default     = "CDM (CCD/DM)"
+  default     = "CDM"
 }
 
 variable "team_contact" {
