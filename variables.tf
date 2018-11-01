@@ -48,10 +48,8 @@ variable "application_type" {
 
 
 // TAG SPECIFIC VARIABLES
-variable "team_name" {
-  type        = "string"
-  description = "The name of your team"
-  default     = "CDM"
+variable "common_tags" {
+  type = "map"
 }
 
 variable "team_contact" {
