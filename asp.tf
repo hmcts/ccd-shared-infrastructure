@@ -6,5 +6,5 @@ module "appServicePlan" {
   asp_capacity = "${var.asp_capacity}"
   asp_name = "${var.product}"
   ase_name = "${local.ase_name}"
-  tag_list = "${local.common_tags}"
+  tag_list = "${local.tags}"
 }
