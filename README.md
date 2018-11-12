@@ -15,3 +15,4 @@ This module sets up the shared infrastructure for CCD.
 ### Output
 
 - `vaultName` The name of the key vault.
+
