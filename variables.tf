@@ -10,9 +10,9 @@ variable "env" {
   description = "The deployment environment (sandbox, aat, prod etc..)"
 }
 
-variable "subscription" {
-  type = "string"
-}
+variable "subscription" {}
+
+variable "ilbIp" {}
 
 variable "location" {
   type    = "string"
@@ -36,11 +36,24 @@ variable "asp_capacity" {
 }
 
 
+// Application Insight Variables
+// UK South is unavailable for Application Insights
+variable "appinsights_location" {
+  type = "string"
+  default = "West Europe"
+  description = "Location for Application Insights"
+}
+
+variable "application_type" {
+  type = "string"
+  default = "Web"
+  description = "Type of Application Insights (Web/Other)"
+}
+
+
 // TAG SPECIFIC VARIABLES
-variable "team_name" {
-  type        = "string"
-  description = "The name of your team"
-  default     = "CDM (CCD/DM)"
+variable "common_tags" {
+  type = "map"
 }
 
 variable "team_contact" {

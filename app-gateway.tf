@@ -56,7 +56,7 @@ module "appGw" {
     },
     {
       name = "${var.product}-${var.env}-backend-pool"
-      backendAddresses = "${local.ccdgw_hostname}"
+      backendAddresses = "${var.ilbIp}"
     }
   ]
 
