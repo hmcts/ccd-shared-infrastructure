@@ -10,6 +10,10 @@ variable "env" {
   description = "The deployment environment (sandbox, aat, prod etc..)"
 }
 
+variable "subscription" {
+  type = "string"
+}
+
 variable "location" {
   type    = "string"
   description = "The location where you would like to deploy your infrastructure"
@@ -63,3 +67,21 @@ variable "destroy_me" {
   description = "Here be dragons! In the future if this is set to Yes then automation will delete this resource on a schedule. Please set to No unless you know what you are doing"
   default     = "No"
 }
+
+variable "external_cert_vault_uri" {}
+variable "external_cert_name" {}
+variable "external_hostname" {}
+
+// http parameters
+variable "health_check_interval" {
+  default = "30"
+}
+
+variable "health_check_timeout" {
+  default = "30"
+}
+
+variable "unhealthy_threshold" {
+  default = "5"
+}
+

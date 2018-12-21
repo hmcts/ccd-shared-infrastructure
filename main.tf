@@ -8,6 +8,8 @@ locals {
       "Destroy Me", var.destroy_me
     )
   )}"
+
+  ccdgw_hostname = "gateway.${var.env}.platform.hmcts.net"
 }
 
 // Shared Resource Group
