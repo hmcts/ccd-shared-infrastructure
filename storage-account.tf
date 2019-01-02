@@ -1,3 +1,7 @@
+// Shared and specialised Storage Accounts
+
+
+// Shared Storage Account
 module "storage_account" {
   source                    = "git@github.com:hmcts/cnp-module-storage-account.git?ref=0.0.1"
   env                       = "${var.env}"
