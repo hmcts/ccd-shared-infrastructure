@@ -5,8 +5,8 @@ data "azurerm_key_vault_secret" "cert" {
 
 
 module "appGw" {
-//  source            = "git@github.com:hmcts/cnp-module-waf?ref=stripDownWf"
-  source            = "https://github.com/tzarsmango/cnp-module-waf.git"
+  source            = "git@github.com:hmcts/cnp-module-waf?ref=stripDownWf"
+//  source            = "https://github.com/tzarsmango/cnp-module-waf.git"
   env               = "${var.env}"
   subscription      = "${var.subscription}"
   location          = "${var.location}"
@@ -155,7 +155,7 @@ module "appGw" {
     }
   ]
 
-  url_path_map = [
+  urlPathMap = [
     {
       name                                = "https-url-path-map-gateway"
       default_backend_address_pool_name   = "${var.product}-${var.env}-backend-pool"
