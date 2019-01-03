@@ -70,7 +70,8 @@ variable "destroy_me" {
 
 variable "external_cert_vault_uri" {}
 variable "external_cert_name" {}
-variable "external_hostname" {}
+variable "external_hostname_gateway" {}
+variable "external_hostname_www" {}
 
 // http parameters
 variable "health_check_interval" {
