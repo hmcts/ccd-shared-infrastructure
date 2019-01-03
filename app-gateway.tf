@@ -154,18 +154,23 @@ module "appGw" {
     }
   ]
 
-  url_path_map = {
-    name                               = "https-url-path-map-gateway"
-    default_backend_address_pool_name  = "${var.product}-${var.env}-backend-pool"
-    default_backend_http_settings_name = "backend-443-nocookies-gateway"
-    path_rule = {
-      name                       = "https-url-path-map-gateway-rule-palo-alto"
-      paths                      = [ "/documents" ]
-      backend_address_pool_name  = "${var.product}-${var.env}-palo-alto"
-      backend_http_settings_name = "backend-443-nocookies-gateway"
+  url_path_map = [
+    {
+      name                                = "https-url-path-map-gateway"
+      default_backend_address_pool_name   = "${var.product}-${var.env}-backend-pool"
+      default_backend_http_settings_name  = "backend-443-nocookies-gateway"
+      path_rule                           = [
+        {
+          name                        = "https-url-path-map-gateway-rule-palo-alto"
+          paths                       = [
+            "/documents"
+          ]
+          backend_address_pool_name   = "${var.product}-${var.env}-palo-alto"
+          backend_http_settings_name  = "backend-443-nocookies-gateway"
+        }
+      ]
     }
-
-  }
+  ]
 
   probes = [
     {
