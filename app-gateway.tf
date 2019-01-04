@@ -62,7 +62,7 @@ module "appGw" {
       Protocol                = "Https"
       SslCertificate          = "${var.external_cert_name}"
       hostName                = "${var.external_hostname_www}"
-    }
+    },
   ]
 
   # Backend address Pools
@@ -73,8 +73,12 @@ module "appGw" {
     },
     {
       name = "${var.product}-${var.env}-backend-pool"
-      backendAddresses = "${var.ilbIp}"
-    }
+      backendAddresses = [
+        {
+          ipAddress = "${var.ilbIp}"
+        },
+      ]
+    },
   ]
 
   backendHttpSettingsCollection = [
@@ -121,7 +125,7 @@ module "appGw" {
       probe                          = "https-probe-www"
       PickHostNameFromBackendAddress = "True"
       Host                           = "${var.external_hostname_www}"
-    }
+    },
   ]
 
   # Request routing rules
@@ -155,7 +159,7 @@ module "appGw" {
       httpListener         = "${var.product}-https-listener-www"
       backendAddressPool  = "${var.product}-${var.env}-backend-pool"
       backendHttpSettings = "backend-443-nocookies-www"
-    }
+    },
   ]
 
 //  urlPathMap = [
@@ -224,7 +228,7 @@ module "appGw" {
       backendHttpSettings                 = "backend-443-nocookies-www"
       host                                = "${var.external_hostname_www}"
       healthyStatusCodes                  = "200-399"
-    }
+    },
   ]
 }
 
