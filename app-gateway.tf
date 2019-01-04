@@ -135,9 +135,12 @@ module "appGw" {
     },
     {
       name                       = "https-gateway"
-      rule_type                  = "PathBasedRouting"
+      rule_type                  = "Basic"
+//      rule_type                  = "PathBasedRouting"
       http_listener_name         = "${var.product}-https-listener-gateway"
-      url_path_map_name          = "https-url-path-map-gateway"
+//      url_path_map_name          = "https-url-path-map-gateway"
+      backend_address_pool_name  = "${var.product}-${var.env}-backend-pool"
+      backend_http_settings_name = "backend-443-nocookies-gateway"
     },
     {
       name                       = "http-www"
@@ -155,23 +158,23 @@ module "appGw" {
     }
   ]
 
-  urlPathMap = [
-    {
-      name                                = "https-url-path-map-gateway"
-      default_backend_address_pool_name   = "${var.product}-${var.env}-backend-pool"
-      default_backend_http_settings_name  = "backend-443-nocookies-gateway"
-      path_rule                           = [
-        {
-          name                        = "https-url-path-map-gateway-rule-palo-alto"
-          paths                       = [
-            "/documents"
-          ]
-          backend_address_pool_name   = "${var.product}-${var.env}-palo-alto"
-          backend_http_settings_name  = "backend-443-nocookies-gateway"
-        }
-      ]
-    }
-  ]
+//  urlPathMap = [
+//    {
+//      name                                = "https-url-path-map-gateway"
+//      default_backend_address_pool_name   = "${var.product}-${var.env}-backend-pool"
+//      default_backend_http_settings_name  = "backend-443-nocookies-gateway"
+//      path_rule                           = [
+//        {
+//          name                        = "https-url-path-map-gateway-rule-palo-alto"
+//          paths                       = [
+//            "/documents"
+//          ]
+//          backend_address_pool_name   = "${var.product}-${var.env}-palo-alto"
+//          backend_http_settings_name  = "backend-443-nocookies-gateway"
+//        }
+//      ]
+//    }
+//  ]
 
   probes = [
     {
