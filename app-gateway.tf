@@ -97,7 +97,7 @@ module "appGw" {
       name                           = "backend-443-nocookies-gateway"
       port                           = 443
       Protocol                       = "Https"
-      AuthenticationCertificates     = ""
+      AuthenticationCertificates     = "ilbCert"
       CookieBasedAffinity            = "Disabled"
       probeEnabled                   = "True"
       probe                          = "https-probe-gateway"
@@ -119,7 +119,7 @@ module "appGw" {
       name                           = "backend-443-nocookies-www"
       port                           = 443
       Protocol                       = "Https"
-      AuthenticationCertificates     = ""
+      AuthenticationCertificates     = "ilbCert"
       CookieBasedAffinity            = "Disabled"
       probeEnabled                   = "True"
       probe                          = "https-probe-www"
