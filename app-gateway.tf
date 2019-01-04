@@ -128,33 +128,33 @@ module "appGw" {
   requestRoutingRules = [
     {
       name                       = "http-gateway"
-      rule_type                  = "Basic"
-      http_listener_name         = "${var.product}-http-listener-gateway"
-      backend_address_pool_name  = "${var.product}-${var.env}-backend-pool"
-      backend_http_settings_name = "backend-80-nocookies-gateway"
+      RuleType                  = "Basic"
+      httpListener         = "${var.product}-http-listener-gateway"
+      backendAddressPool  = "${var.product}-${var.env}-backend-pool"
+      backendHttpSettings = "backend-80-nocookies-gateway"
     },
     {
       name                       = "https-gateway"
-      rule_type                  = "Basic"
-//      rule_type                  = "PathBasedRouting"
-      http_listener_name         = "${var.product}-https-listener-gateway"
+      RuleType                  = "Basic"
+//      RuleType                  = "PathBasedRouting"
+      httpListener         = "${var.product}-https-listener-gateway"
 //      url_path_map_name          = "https-url-path-map-gateway"
-      backend_address_pool_name  = "${var.product}-${var.env}-backend-pool"
-      backend_http_settings_name = "backend-443-nocookies-gateway"
+      backendAddressPool  = "${var.product}-${var.env}-backend-pool"
+      backendHttpSettings = "backend-443-nocookies-gateway"
     },
     {
       name                       = "http-www"
-      rule_type                  = "Basic"
-      http_listener_name         = "${var.product}-http-listener-www"
-      backend_address_pool_name  = "${var.product}-${var.env}-backend-pool"
-      backend_http_settings_name = "backend-80-nocookies-www"
+      RuleType                  = "Basic"
+      httpListener         = "${var.product}-http-listener-www"
+      backendAddressPool  = "${var.product}-${var.env}-backend-pool"
+      backendHttpSettings = "backend-80-nocookies-www"
     },
     {
       name                       = "https-www"
-      rule_type                  = "Basic"
-      http_listener_name         = "${var.product}-https-listener-www"
-      backend_address_pool_name  = "${var.product}-${var.env}-backend-pool"
-      backend_http_settings_name = "backend-443-nocookies-www"
+      RuleType                  = "Basic"
+      httpListener         = "${var.product}-https-listener-www"
+      backendAddressPool  = "${var.product}-${var.env}-backend-pool"
+      backendHttpSettings = "backend-443-nocookies-www"
     }
   ]
 
