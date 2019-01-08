@@ -4,7 +4,7 @@ data "azurerm_key_vault_secret" "cert" {
 }
 
 
-module "appGw" {
+module "appGw" {}
   source            = "git@github.com:hmcts/cnp-module-waf?ref=stripDownWf_pathBasedRR"
   env               = "${var.env}"
   subscription      = "${var.subscription}"
@@ -135,6 +135,7 @@ module "appGw" {
       httpListener        = "${var.product}-http-listener-gateway"
       backendAddressPool  = "${var.product}-${var.env}-backend-pool"
       backendHttpSettings = "backend-80-nocookies-gateway"
+      urlPathMap = ""
     },
     {
       name                = "https-gateway"
@@ -148,6 +149,7 @@ module "appGw" {
       httpListener        = "${var.product}-http-listener-www"
       backendAddressPool  = "${var.product}-${var.env}-backend-pool"
       backendHttpSettings = "backend-80-nocookies-www"
+      urlPathMap = ""
     },
     {
       name                = "https-www"
@@ -155,6 +157,7 @@ module "appGw" {
       httpListener        = "${var.product}-https-listener-www"
       backendAddressPool  = "${var.product}-${var.env}-backend-pool"
       backendHttpSettings = "backend-443-nocookies-www"
+      urlPathMap = ""
     },
   ]
 
