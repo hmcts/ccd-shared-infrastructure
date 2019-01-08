@@ -142,6 +142,8 @@ module "appGw" {
       ruleType            = "PathBasedRouting"
       httpListener        = "${var.product}-https-listener-gateway"
       urlPathMap          = "https-url-path-map-gateway"
+      backendAddressPool  = ""
+      backendHttpSettings = ""
     },
     {
       name                = "http-www"
