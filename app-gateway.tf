@@ -4,9 +4,8 @@ data "azurerm_key_vault_secret" "cert" {
 }
 
 
-module "appGw" {
-  source            = "git@github.com:hmcts/cnp-module-waf?ref=stripDownWf"
-//  source            = "https://github.com/tzarsmango/cnp-module-waf.git"
+module "appGw" {}
+  source            = "git@github.com:hmcts/cnp-module-waf?ref=_pathBasedRR"
   env               = "${var.env}"
   subscription      = "${var.subscription}"
   location          = "${var.location}"
@@ -162,23 +161,23 @@ module "appGw" {
     },
   ]
 
-//  urlPathMap = [
-//    {
-//      name                                = "https-url-path-map-gateway"
-//      default_backend_address_pool_name   = "${var.product}-${var.env}-backend-pool"
-//      default_backend_http_settings_name  = "backend-443-nocookies-gateway"
-//      path_rule                           = [
-//        {
-//          name                        = "https-url-path-map-gateway-rule-palo-alto"
-//          paths                       = [
-//            "/documents"
-//          ]
-//          backend_address_pool_name   = "${var.product}-${var.env}-palo-alto"
-//          backend_http_settings_name  = "backend-443-nocookies-gateway"
-//        }
-//      ]
-//    }
-//  ]
+  urlPathMap = [
+    {
+      name                                = "https-url-path-map-gateway"
+      defaultBackendAddressPoolName   = "${var.product}-${var.env}-backend-pool"
+      defaultBackendHttpSettingsName  = "backend-443-nocookies-gateway"
+      pathRules                           = [
+        {
+          name                        = "https-url-path-map-gateway-rule-palo-alto"
+          paths                       = [
+            "/documents"
+          ]
+          backendAddressPool    = "${var.product}-${var.env}-palo-alto"
+          backendHttpSettings  = "backend-443-nocookies-gateway"
+        }
+      ]
+    }
+  ]
 
   probes = [
     {
