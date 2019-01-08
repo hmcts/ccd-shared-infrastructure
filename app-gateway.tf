@@ -131,27 +131,27 @@ module "appGw" {
   requestRoutingRules = [
     {
       name                = "http-gateway"
-      RuleType            = "Basic"
+      ruleType            = "Basic"
       httpListener        = "${var.product}-http-listener-gateway"
       backendAddressPool  = "${var.product}-${var.env}-backend-pool"
       backendHttpSettings = "backend-80-nocookies-gateway"
     },
     {
       name                = "https-gateway"
-      RuleType            = "PathBasedRouting"
+      ruleType            = "PathBasedRouting"
       httpListener        = "${var.product}-https-listener-gateway"
-      url_path_map_name   = "https-url-path-map-gateway"
+      urlPathMaps          = "https-url-path-map-gateway"
     },
     {
       name                = "http-www"
-      RuleType            = "Basic"
+      ruleType            = "Basic"
       httpListener        = "${var.product}-http-listener-www"
       backendAddressPool  = "${var.product}-${var.env}-backend-pool"
       backendHttpSettings = "backend-80-nocookies-www"
     },
     {
       name                = "https-www"
-      RuleType            = "Basic"
+      ruleType            = "Basic"
       httpListener        = "${var.product}-https-listener-www"
       backendAddressPool  = "${var.product}-${var.env}-backend-pool"
       backendHttpSettings = "backend-443-nocookies-www"
