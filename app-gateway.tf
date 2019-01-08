@@ -100,7 +100,7 @@ module "appGw" {
       CookieBasedAffinity            = "Disabled"
       probeEnabled                   = "True"
       probe                          = "https-probe-gateway"
-      PickHostNameFromBackendAddress = "True"
+      PickHostNameFromBackendAddress = "False"
       Host                           = "${var.external_hostname_gateway}"
     },
     {
@@ -122,7 +122,7 @@ module "appGw" {
       CookieBasedAffinity            = "Disabled"
       probeEnabled                   = "True"
       probe                          = "https-probe-www"
-      PickHostNameFromBackendAddress = "True"
+      PickHostNameFromBackendAddress = "False"
       Host                           = "${var.external_hostname_www}"
     },
   ]
