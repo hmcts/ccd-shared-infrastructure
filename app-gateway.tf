@@ -161,7 +161,7 @@ module "appGw" {
     },
   ]
 
-  urlPathMap = [
+  urlPathMaps = [
     {
       name                                = "https-url-path-map-gateway"
       defaultBackendAddressPoolName   = "${var.product}-${var.env}-backend-pool"
