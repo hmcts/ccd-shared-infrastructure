@@ -130,32 +130,29 @@ module "appGw" {
   # Request routing rules
   requestRoutingRules = [
     {
-      name                       = "http-gateway"
-      RuleType                  = "Basic"
-      httpListener         = "${var.product}-http-listener-gateway"
+      name                = "http-gateway"
+      RuleType            = "Basic"
+      httpListener        = "${var.product}-http-listener-gateway"
       backendAddressPool  = "${var.product}-${var.env}-backend-pool"
       backendHttpSettings = "backend-80-nocookies-gateway"
     },
     {
-      name                       = "https-gateway"
-      RuleType                  = "Basic"
-//      RuleType                  = "PathBasedRouting"
-      httpListener         = "${var.product}-https-listener-gateway"
-//      url_path_map_name          = "https-url-path-map-gateway"
-      backendAddressPool  = "${var.product}-${var.env}-backend-pool"
-      backendHttpSettings = "backend-443-nocookies-gateway"
+      name                = "https-gateway"
+      RuleType            = "PathBasedRouting"
+      httpListener        = "${var.product}-https-listener-gateway"
+      url_path_map_name   = "https-url-path-map-gateway"
     },
     {
-      name                       = "http-www"
-      RuleType                  = "Basic"
-      httpListener         = "${var.product}-http-listener-www"
+      name                = "http-www"
+      RuleType            = "Basic"
+      httpListener        = "${var.product}-http-listener-www"
       backendAddressPool  = "${var.product}-${var.env}-backend-pool"
       backendHttpSettings = "backend-80-nocookies-www"
     },
     {
-      name                       = "https-www"
-      RuleType                  = "Basic"
-      httpListener         = "${var.product}-https-listener-www"
+      name                = "https-www"
+      RuleType            = "Basic"
+      httpListener        = "${var.product}-https-listener-www"
       backendAddressPool  = "${var.product}-${var.env}-backend-pool"
       backendHttpSettings = "backend-443-nocookies-www"
     },
@@ -163,17 +160,17 @@ module "appGw" {
 
   urlPathMaps = [
     {
-      name                                = "https-url-path-map-gateway"
+      name                            = "https-url-path-map-gateway"
       defaultBackendAddressPoolName   = "${var.product}-${var.env}-backend-pool"
       defaultBackendHttpSettingsName  = "backend-443-nocookies-gateway"
-      pathRules                           = [
+      pathRules                       = [
         {
           name                        = "https-url-path-map-gateway-rule-palo-alto"
           paths                       = [
             "/documents"
           ]
-          backendAddressPool    = "${var.product}-${var.env}-palo-alto"
-          backendHttpSettings  = "backend-443-nocookies-gateway"
+          backendAddressPool          = "${var.product}-${var.env}-palo-alto"
+          backendHttpSettings         = "backend-443-nocookies-gateway"
         }
       ]
     }
