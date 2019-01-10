@@ -171,7 +171,7 @@ module "appGw" {
       pathRules                       = [
         {
           name                        = "https-url-path-map-gateway-rule-palo-alto"
-          paths                       = "/documents"
+          Path                        = "/documents"
           backendAddressPool          = "${var.product}-${var.env}-palo-alto"
           backendHttpSettings         = "backend-443-nocookies-gateway"
         }
