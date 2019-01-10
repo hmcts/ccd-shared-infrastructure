@@ -180,7 +180,7 @@ module "appGw" {
     }
   ]
 
-  patRules = [
+  pathRules = [
     {
       name                        = "https-url-path-map-gateway-rule-palo-alto"
       paths                       = ["/documents"]
