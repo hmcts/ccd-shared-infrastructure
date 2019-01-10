@@ -86,3 +86,8 @@ variable "unhealthy_threshold" {
   default = "5"
 }
 
+variable "paths" {
+  type    = "list"
+  default = [ "/documents" ]
+}
+
