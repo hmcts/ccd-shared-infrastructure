@@ -135,7 +135,7 @@ module "appGw" {
       httpListener        = "${var.product}-http-listener-gateway"
       backendAddressPool  = "${var.product}-${var.env}-backend-pool"
       backendHttpSettings = "backend-80-nocookies-gateway"
-      urlPathMap = ""
+      urlPathMap          = ""
     },
     {
       name                = "https-gateway"
@@ -151,7 +151,7 @@ module "appGw" {
       httpListener        = "${var.product}-http-listener-www"
       backendAddressPool  = "${var.product}-${var.env}-backend-pool"
       backendHttpSettings = "backend-80-nocookies-www"
-      urlPathMap = ""
+      urlPathMap          = ""
     },
     {
       name                = "https-www"
@@ -159,7 +159,7 @@ module "appGw" {
       httpListener        = "${var.product}-https-listener-www"
       backendAddressPool  = "${var.product}-${var.env}-backend-pool"
       backendHttpSettings = "backend-443-nocookies-www"
-      urlPathMap = ""
+      urlPathMap          = ""
     },
   ]
 
@@ -171,7 +171,7 @@ module "appGw" {
       pathRules                       = [
         {
           name                        = "https-url-path-map-gateway-rule-palo-alto"
-          paths                       = "/documents"
+          paths                       = ["/documents"]
           backendAddressPool          = "${var.product}-${var.env}-palo-alto"
           backendHttpSettings         = "backend-443-nocookies-gateway"
         }
