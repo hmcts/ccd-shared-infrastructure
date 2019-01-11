@@ -135,15 +135,6 @@ module "appGw" {
       httpListener        = "${var.product}-http-listener-gateway"
       backendAddressPool  = "${var.product}-${var.env}-backend-pool"
       backendHttpSettings = "backend-80-nocookies-gateway"
-      urlPathMap          = ""
-    },
-    {
-      name                = "https-gateway"
-      ruleType            = "PathBasedRouting"
-      httpListener        = "${var.product}-https-listener-gateway"
-      urlPathMap          = "https-url-path-map-gateway"
-      backendAddressPool  = ""
-      backendHttpSettings = ""
     },
     {
       name                = "http-www"
@@ -151,7 +142,6 @@ module "appGw" {
       httpListener        = "${var.product}-http-listener-www"
       backendAddressPool  = "${var.product}-${var.env}-backend-pool"
       backendHttpSettings = "backend-80-nocookies-www"
-      urlPathMap          = ""
     },
     {
       name                = "https-www"
@@ -159,8 +149,15 @@ module "appGw" {
       httpListener        = "${var.product}-https-listener-www"
       backendAddressPool  = "${var.product}-${var.env}-backend-pool"
       backendHttpSettings = "backend-443-nocookies-www"
-      urlPathMap          = ""
-    },
+    }
+  ]
+  requestRoutingRulesPathBased = [
+    {
+      name                = "https-gateway"
+      ruleType            = "PathBasedRouting"
+      httpListener        = "${var.product}-https-listener-gateway"
+      urlPathMap          = "https-url-path-map-gateway"
+    }
   ]
 
   urlPathMaps = [
