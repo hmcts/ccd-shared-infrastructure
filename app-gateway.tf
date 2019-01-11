@@ -149,14 +149,13 @@ module "appGw" {
       httpListener        = "${var.product}-https-listener-www"
       backendAddressPool  = "${var.product}-${var.env}-backend-pool"
       backendHttpSettings = "backend-443-nocookies-www"
-    }
-  ]
-  requestRoutingRulesPathBased = [
+    },
     {
       name                = "https-gateway"
-      ruleType            = "PathBasedRouting"
+      ruleType            = "Basic"
       httpListener        = "${var.product}-https-listener-gateway"
-      urlPathMap          = "https-url-path-map-gateway"
+      backendAddressPool  = "${var.product}-${var.env}-backend-pool"
+      backendHttpSettings = "backend-443-nocookies-www"
     }
   ]
 
