@@ -130,13 +130,6 @@ module "appGw" {
   # Request routing rules
   requestRoutingRules = [
     {
-      name                = "http-gateway"
-      ruleType            = "Basic"
-      httpListener        = "${var.product}-http-listener-gateway"
-      backendAddressPool  = "${var.product}-${var.env}-backend-pool"
-      backendHttpSettings = "backend-80-nocookies-gateway"
-    },
-    {
       name                = "http-www"
       ruleType            = "Basic"
       httpListener        = "${var.product}-http-listener-www"
@@ -154,23 +147,30 @@ module "appGw" {
       name                = "https-gateway"
       ruleType            = "Basic"
       httpListener        = "${var.product}-https-listener-gateway"
-      backendAddressPool  = "${var.product}-${var.env}-backend-pool"
+      backendAddressPool  = "${var.product}-${var.env}-palo-alto"
       backendHttpSettings = "backend-443-nocookies-www"
     }
   ]
-  requestRoutingRulesPathBased = []
+  requestRoutingRulesPathBased = [
+    {
+      name                = "http-gateway"
+      ruleType            = "PathBasedRouting"
+      httpListener        = "${var.product}-http-listener-gateway"
+      urlPathMap          = "http-url-path-map-gateway"
+    }
+  ]
 
   urlPathMaps = [
     {
-      name                            = "https-url-path-map-gateway"
+      name                            = "http-url-path-map-gateway"
       defaultBackendAddressPool   = "${var.product}-${var.env}-backend-pool"
-      defaultBackendHttpSettings  = "backend-443-nocookies-gateway"
+      defaultBackendHttpSettings  = "backend-80-nocookies-gateway"
       pathRules                       = [
         {
-          name                        = "https-url-path-map-gateway-rule-palo-alto"
+          name                        = "http-url-path-map-gateway-rule-palo-alto"
           paths                        = ["/documents"]
-          backendAddressPool          = "${var.product}-${var.env}-palo-alto"
-          backendHttpSettings         = "backend-443-nocookies-gateway"
+          backendAddressPool          = "${var.product}-${var.env}-backend-pool"
+          backendHttpSettings         = "backend-80-nocookies-gateway"
         }
       ]
     }
