@@ -158,6 +158,7 @@ module "appGw" {
       backendHttpSettings = "backend-443-nocookies-www"
     }
   ]
+  requestRoutingRulesPathBased = []
 
   urlPathMaps = [
     {
