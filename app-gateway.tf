@@ -176,13 +176,13 @@ module "appGw" {
     {
       name                       = "https-url-path-map-gateway"
       defaultBackendAddressPool  = "${var.product}-${var.env}-backend-pool"
-      defaultBackendHttpSettings = "backend-443-nocookies-gateway"
+      defaultBackendHttpSettings = "backend-80-nocookies-gateway"
       pathRules                  = [
         {
           name                = "https-url-path-map-gateway-rule-palo-alto"
           paths               = ["/documents"]
           backendAddressPool  = "${var.product}-${var.env}-palo-alto"
-          backendHttpSettings = "backend-443-nocookies-gateway"
+          backendHttpSettings = "backend-80-nocookies-gateway"
         }
       ]
     }
