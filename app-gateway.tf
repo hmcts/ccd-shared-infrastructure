@@ -144,49 +144,49 @@ module "appGw" {
       backendHttpSettings = "backend-443-nocookies-www"
     }
   ]
-//  requestRoutingRulesPathBased = [
-//    {
-//      name                = "http-gateway"
-//      ruleType            = "PathBasedRouting"
-//      httpListener        = "${var.product}-http-listener-gateway"
-//      urlPathMap          = "http-url-path-map-gateway"
-//    },
-//    {
-//      name                = "https-gateway"
-//      ruleType            = "PathBasedRouting"
-//      httpListener        = "${var.product}-https-listener-gateway"
-//      urlPathMap          = "https-url-path-map-gateway"
-//    }
-//  ]
-//
-//  urlPathMaps = [
-//    {
-//      name                       = "http-url-path-map-gateway"
-//      defaultBackendAddressPool  = "${var.product}-${var.env}-backend-pool"
-//      defaultBackendHttpSettings = "backend-80-nocookies-gateway"
-//      pathRules                  = [
-//        {
-//          name                = "http-url-path-map-gateway-rule-palo-alto"
-//          paths               = ["/documents"]
-//          backendAddressPool  = "${var.product}-${var.env}-palo-alto"
-//          backendHttpSettings = "backend-80-nocookies-gateway"
-//        }
-//      ]
-//    },
-//    {
-//      name                       = "https-url-path-map-gateway"
-//      defaultBackendAddressPool  = "${var.product}-${var.env}-backend-pool"
-//      defaultBackendHttpSettings = "backend-80-nocookies-gateway"
-//      pathRules                  = [
-//        {
-//          name                = "https-url-path-map-gateway-rule-palo-alto"
-//          paths               = ["/documents"]
-//          backendAddressPool  = "${var.product}-${var.env}-palo-alto"
-//          backendHttpSettings = "backend-80-nocookies-gateway"
-//        }
-//      ]
-//    }
-//  ]
+  requestRoutingRulesPathBased = [
+    {
+      name                = "http-gateway"
+      ruleType            = "PathBasedRouting"
+      httpListener        = "${var.product}-http-listener-gateway"
+      urlPathMap          = "http-url-path-map-gateway"
+    },
+    {
+      name                = "https-gateway"
+      ruleType            = "PathBasedRouting"
+      httpListener        = "${var.product}-https-listener-gateway"
+      urlPathMap          = "https-url-path-map-gateway"
+    }
+  ]
+
+  urlPathMaps = [
+    {
+      name                       = "http-url-path-map-gateway"
+      defaultBackendAddressPool  = "${var.product}-${var.env}-backend-pool"
+      defaultBackendHttpSettings = "backend-80-nocookies-gateway"
+      pathRules                  = [
+        {
+          name                = "http-url-path-map-gateway-rule-palo-alto"
+          paths               = ["/documents"]
+          backendAddressPool  = "${var.product}-${var.env}-palo-alto"
+          backendHttpSettings = "backend-80-nocookies-gateway"
+        }
+      ]
+    },
+    {
+      name                       = "https-url-path-map-gateway"
+      defaultBackendAddressPool  = "${var.product}-${var.env}-backend-pool"
+      defaultBackendHttpSettings = "backend-80-nocookies-gateway"
+      pathRules                  = [
+        {
+          name                = "https-url-path-map-gateway-rule-palo-alto"
+          paths               = ["/documents"]
+          backendAddressPool  = "${var.product}-${var.env}-palo-alto"
+          backendHttpSettings = "backend-80-nocookies-gateway"
+        }
+      ]
+    }
+  ]
 
   probes = [
     {
