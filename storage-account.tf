@@ -26,30 +26,35 @@ module "storage_account" {
 
 // Storage Account Vault Secrets
 resource "azurerm_key_vault_secret" "storageaccount_id" {
+  depends_on = ["module.vault"]
   name      = "storage-account-id"
   value     = "${module.storage_account.storageaccount_id}"
   vault_uri = "${module.vault.key_vault_uri}"
 }
 
 resource "azurerm_key_vault_secret" "storageaccount_primary_access_key" {
+  depends_on = ["module.vault"]
   name      = "storage-account-primary-access-key"
   value     = "${module.storage_account.storageaccount_primary_access_key}"
   vault_uri = "${module.vault.key_vault_uri}"
 }
 
 resource "azurerm_key_vault_secret" "storageaccount_secondary_access_key" {
+  depends_on = ["module.vault"]
   name      = "storage-account-secondary-access-key"
   value     = "${module.storage_account.storageaccount_secondary_access_key}"
   vault_uri = "${module.vault.key_vault_uri}"
 }
 
 resource "azurerm_key_vault_secret" "storageaccount_primary_connection_string" {
+  depends_on = ["module.vault"]
   name      = "storage-account-primary-connection-string"
   value     = "${module.storage_account.storageaccount_primary_connection_string}"
   vault_uri = "${module.vault.key_vault_uri}"
 }
 
 resource "azurerm_key_vault_secret" "storageaccount_secondary_connection_string" {
+  depends_on = ["module.vault"]
   name      = "storage-account-secondary-connection-string"
   value     = "${module.storage_account.storageaccount_secondary_connection_string}"
   vault_uri = "${module.vault.key_vault_uri}"
@@ -86,30 +91,35 @@ module "dm_store_storage_account" {
 
 // dm-store blob Storage Account Vault Secrets
 resource "azurerm_key_vault_secret" "dm_store_storageaccount_id" {
+  depends_on = ["module.vault"]
   name      = "dm-store-storage-account-id"
   value     = "${module.dm_store_storage_account.storageaccount_id}"
   vault_uri = "${module.vault.key_vault_uri}"
 }
 
 resource "azurerm_key_vault_secret" "dm_store_storageaccount_primary_access_key" {
+  depends_on = ["module.vault"]
   name      = "dm-store-storage-account-primary-access-key"
   value     = "${module.dm_store_storage_account.storageaccount_primary_access_key}"
   vault_uri = "${module.vault.key_vault_uri}"
 }
 
 resource "azurerm_key_vault_secret" "dm_store_storageaccount_secondary_access_key" {
+  depends_on = ["module.vault"]
   name      = "dm-store-storage-account-secondary-access-key"
   value     = "${module.dm_store_storage_account.storageaccount_secondary_access_key}"
   vault_uri = "${module.vault.key_vault_uri}"
 }
 
 resource "azurerm_key_vault_secret" "dm_store_storageaccount_primary_connection_string" {
+  depends_on = ["module.vault"]
   name      = "dm-store-storage-account-primary-connection-string"
   value     = "${module.dm_store_storage_account.storageaccount_primary_connection_string}"
   vault_uri = "${module.vault.key_vault_uri}"
 }
 
 resource "azurerm_key_vault_secret" "dm_store_storageaccount_secondary_connection_string" {
+  depends_on = ["module.vault"]
   name      = "dm-store-storage-account-secondary-connection-string"
   value     = "${module.dm_store_storage_account.storageaccount_secondary_connection_string}"
   vault_uri = "${module.vault.key_vault_uri}"
