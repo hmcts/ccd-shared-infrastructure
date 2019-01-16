@@ -32,14 +32,6 @@ variable "asp_capacity" {
 }
 
 
-// Application Insight Variables
-// UK South is unavailable for Application Insights
-variable "appinsights_location" {
-  type = "string"
-  default = "West Europe"
-  description = "Location for Application Insights"
-}
-
 variable "application_type" {
   type = "string"
   default = "Web"
