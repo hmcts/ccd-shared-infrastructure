@@ -90,7 +90,7 @@ module "appGw" {
       probeEnabled                   = "True"
       probe                          = "http-probe-gateway"
       PickHostNameFromBackendAddress = "False"
-      Host                           = "${var.external_hostname_gateway}"
+      HostName                       = "${var.external_hostname_gateway}"
     },
     {
       name                           = "backend-443-nocookies-gateway"
@@ -101,7 +101,7 @@ module "appGw" {
       probeEnabled                   = "True"
       probe                          = "https-probe-gateway"
       PickHostNameFromBackendAddress = "False"
-      Host                           = "${var.external_hostname_gateway}"
+      HostName                       = "${var.external_hostname_gateway}"
     },
     {
       name                           = "backend-80-nocookies-www"
@@ -112,7 +112,7 @@ module "appGw" {
       probeEnabled                   = "True"
       probe                          = "http-probe-www"
       PickHostNameFromBackendAddress = "False"
-      Host                           = "${var.external_hostname_www}"
+      HostName                       = "${var.external_hostname_www}"
     },
     {
       name                           = "backend-443-nocookies-www"
@@ -123,7 +123,7 @@ module "appGw" {
       probeEnabled                   = "True"
       probe                          = "https-probe-www"
       PickHostNameFromBackendAddress = "False"
-      Host                           = "${var.external_hostname_www}"
+      HostName                       = "${var.external_hostname_www}"
     },
   ]
 
