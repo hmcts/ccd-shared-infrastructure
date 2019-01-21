@@ -143,9 +143,7 @@ module "appGw" {
       httpListener        = "${var.product}-https-listener-www"
       backendAddressPool  = "${var.product}-${var.env}-backend-pool"
       backendHttpSettings = "backend-443-nocookies-www"
-    }
-  ]
-  requestRoutingRulesPathBased = [
+    },
     {
       name                = "http-gateway"
       ruleType            = "PathBasedRouting"
