@@ -11,6 +11,7 @@ module "appGw" {
   location          = "${var.location}"
   wafName           = "${var.product}-appGW"
   resourcegroupname = "${azurerm_resource_group.rg.name}"
+  use_authentication_cert = "true"
 
   # vNet connections
   gatewayIpConfigurations = [
