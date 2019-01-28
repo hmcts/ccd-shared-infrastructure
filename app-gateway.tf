@@ -4,8 +4,14 @@ data "azurerm_key_vault_secret" "cert" {
 }
 
 
+data "azurerm_subnet" "ase_subnet" {
+  name                 = "core-infra-subnet-0-${var.env}"
+  virtual_network_name = "core-infra-vnet-${var.env}"
+  resource_group_name  = "core-infra-${var.env}"
+}
+
 module "appGw" {
-  source            = "git@github.com:hmcts/cnp-module-waf?ref=pathBasedRR"
+  source            = "git@github.com:hmcts/cnp-module-waf?ref=ccd/CHG0033576"
   env               = "${var.env}"
   subscription      = "${var.subscription}"
   location          = "${var.location}"
@@ -17,7 +23,7 @@ module "appGw" {
   gatewayIpConfigurations = [
     {
       name     = "internalNetwork"
-      subnetId = "${data.azurerm_subnet.main_subnet.id}"
+      subnetId = "${data.azurerm_subnet.ase_subnet.id}"
     },
   ]
 
@@ -143,7 +149,10 @@ module "appGw" {
       httpListener        = "${var.product}-https-listener-www"
       backendAddressPool  = "${var.product}-${var.env}-backend-pool"
       backendHttpSettings = "backend-443-nocookies-www"
-    },
+    }
+  ]
+
+  requestRoutingRulesPathBased = [
     {
       name                = "http-gateway"
       ruleType            = "PathBasedRouting"
@@ -238,15 +247,3 @@ module "appGw" {
     },
   ]
 }
-
-// As there is not support for redirecction rules in Azure for terraform yet. HTTPS is the only listener configured
-// TODO ref:https://github.com/terraform-providers/terraform-provider-azurerm/issues/552#issuecomment-427295158
-//resource "null_resource" "config_redirect_rule_http_to_https" {
-//  provisioner "local-exec" {
-//    command     = "az network application-gateway redirect-config create --gateway-name ${appGw.wafName} --name ${azurerm_virtual_network.k8s_vnet.name}-rcfg-http-to-https --resource-group ${azurerm_resource_group.rg.name} --type Permanent --target-listener ${azurerm_virtual_network.k8s_vnet.name}-httplstn-https"
-//  }
-//
-//  lifecycle {
-//    ignore_changes = ["provisioner"]
-//  }
-//}
