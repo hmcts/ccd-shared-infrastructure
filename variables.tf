@@ -63,3 +63,28 @@ variable "destroy_me" {
   description = "Here be dragons! In the future if this is set to Yes then automation will delete this resource on a schedule. Please set to No unless you know what you are doing"
   default     = "No"
 }
+
+variable "external_cert_name" {
+  type = "string"
+}
+
+variable "external_hostname_gateway" {
+  type = "string"
+}
+
+variable "external_hostname_www" {
+  type = "string"
+}
+
+// http parameters
+variable "health_check_interval" {
+  default = "30"
+}
+
+variable "health_check_timeout" {
+  default = "30"
+}
+
+variable "unhealthy_threshold" {
+  default = "5"
+}
