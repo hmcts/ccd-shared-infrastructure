@@ -6,4 +6,8 @@
 *.tfstate.*
 
 # .tfvars files
-*.tfvars
+#*.tfvars
+
+# IntelliJ IDEA files
+.idea/
+*.iml
