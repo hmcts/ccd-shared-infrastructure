@@ -10,6 +10,14 @@ variable "env" {
   description = "The deployment environment (sandbox, aat, prod etc..)"
 }
 
+variable "subscription" {
+  type = "string"
+}
+
+variable "ilbIp" {
+  type = "string"
+}
+
 variable "location" {
   type    = "string"
   description = "The location where you would like to deploy your infrastructure"
