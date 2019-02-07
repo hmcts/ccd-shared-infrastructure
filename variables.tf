@@ -10,6 +10,14 @@ variable "env" {
   description = "The deployment environment (sandbox, aat, prod etc..)"
 }
 
+variable "subscription" {
+  type = "string"
+}
+
+variable "ilbIp" {
+  type = "string"
+}
+
 variable "location" {
   type    = "string"
   description = "The location where you would like to deploy your infrastructure"
@@ -54,4 +62,29 @@ variable "destroy_me" {
   type        = "string"
   description = "Here be dragons! In the future if this is set to Yes then automation will delete this resource on a schedule. Please set to No unless you know what you are doing"
   default     = "No"
+}
+
+variable "external_cert_name" {
+  type = "string"
+}
+
+variable "external_hostname_gateway" {
+  type = "string"
+}
+
+variable "external_hostname_www" {
+  type = "string"
+}
+
+// http parameters
+variable "health_check_interval" {
+  default = "30"
+}
+
+variable "health_check_timeout" {
+  default = "30"
+}
+
+variable "unhealthy_threshold" {
+  default = "5"
 }
