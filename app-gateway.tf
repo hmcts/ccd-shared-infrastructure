@@ -100,17 +100,6 @@ module "appGw" {
       HostName                       = "${var.external_hostname_gateway}"
     },
     {
-      name                           = "backend-443-nocookies-gateway"
-      port                           = 443
-      Protocol                       = "Https"
-      AuthenticationCertificates     = "ilbCert"
-      CookieBasedAffinity            = "Disabled"
-      probeEnabled                   = "True"
-      probe                          = "https-probe-gateway"
-      PickHostNameFromBackendAddress = "False"
-      HostName                       = "${var.external_hostname_gateway}"
-    },
-    {
       name                           = "backend-80-nocookies-www"
       port                           = 80
       Protocol                       = "Http"
@@ -208,18 +197,6 @@ module "appGw" {
       backendHttpSettings                 = "backend-80-nocookies-gateway"
       host                                = "${var.external_hostname_gateway}"
       healthyStatusCodes                  = "200-404"                  // MS returns 400 on /, allowing more codes in case they change it
-    },
-    {
-      name                                = "https-probe-gateway"
-      protocol                            = "Https"
-      path                                = "/"
-      interval                            = "${var.health_check_interval}"
-      timeout                             = "${var.health_check_timeout}"
-      unhealthyThreshold                  = "${var.unhealthy_threshold}"
-      pickHostNameFromBackendHttpSettings = "false"
-      backendHttpSettings                 = "backend-443-nocookies-gateway"
-      host                                = "${var.external_hostname_gateway}"
-      healthyStatusCodes                  = "200-399"
     },
     {
       name                                = "http-probe-www"
