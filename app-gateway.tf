@@ -20,6 +20,7 @@ module "appGw" {
   use_authentication_cert = "true"
   wafFileUploadLimit = "100"
   wafMaxRequestBodySize = "128"
+  common_tags = "${local.tags}"
 
   # vNet connections
   gatewayIpConfigurations = [
