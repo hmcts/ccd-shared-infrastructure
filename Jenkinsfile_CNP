@@ -2,29 +2,14 @@
 //noinspection GroovyUnusedAssignment
 @Library("Infrastructure") _
 
-import uk.gov.hmcts.contino.Environment
-
-Environment environment = new Environment(env)
-
-slackChannel = "#ccd-master-builds"
-
-onMaster {
-    try {
-        sharedInfrastructurePipeline('ccd', environment.nonProdName, 'nonprod')
-        sharedInfrastructurePipeline('ccd', environment.prodName, 'prod')
-        notifyBuildFixed channel: slackChannel
-    } catch (err) {
-        notifyBuildFailure channel: slackChannel
-        throw err
+withInfraPipeline('ccd') {
+    onMaster {
+        enableSlackNotifications('#ccd-master-builds')
     }
-}
-
-onDemo {
-    try {
-        sharedInfrastructurePipeline('ccd', environment.demoName, 'nonprod')
-        notifyBuildFixed channel: slackChannel
-    } catch (err) {
-        notifyBuildFailure channel: slackChannel
-        throw err
+    onDemo {
+        enableSlackNotifications('#ccd-demo-builds')
+    }
+    onPR {
+        enableSlackNotifications('#ccd-pr-builds')
     }
 }
