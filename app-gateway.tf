@@ -18,8 +18,8 @@ module "appGw" {
   wafName           = "${var.product}-appGW"
   resourcegroupname = "${azurerm_resource_group.rg.name}"
   use_authentication_cert = "true"
-  file_upload_limit_mb = "100"
-  max_request_body_size_kb = "128"
+  wafFileUploadLimit = "100"
+  wafMaxRequestBodySize = "128"
 
   # vNet connections
   gatewayIpConfigurations = [
