@@ -11,10 +11,6 @@ properties([
 
 slackChannel = '#ccd-param-builds'
 
-try {
-    sharedInfrastructurePipeline('ccd', params.ENVIRONMENT, 'sandbox')
-    notifyBuildFixed channel: slackChannel
-} catch (err) {
-    notifyBuildFailure channel: slackChannel
-    throw err
+withParameterizedInfraPipeline('ccd', params.ENVIRONMENT, 'sandbox') {
+    enableSlackNotifications('#ccd-param-builds')
 }
