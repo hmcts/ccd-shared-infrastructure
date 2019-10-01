@@ -9,6 +9,8 @@ module "vault" {
   product_group_object_id = "be8b3850-998a-4a66-8578-da268b8abd6b"
 
   common_tags = "${local.tags}"
+
+  managed_identity_object_id = "${var.managed_identity_object_id}"
 }
  
 data "azurerm_key_vault" "s2s_vault" {
