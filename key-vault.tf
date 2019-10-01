@@ -10,6 +10,22 @@ module "vault" {
 
   common_tags = "${local.tags}"
 }
+ 
+data "azurerm_key_vault" "s2s_vault" {
+  name = "s2s-${var.env}"
+  resource_group_name = "rpe-service-auth-provider-${var.env}"
+}
+
+data "azurerm_key_vault_secret" "ccd_gw_s2s_key" {
+  name = "microservicekey-ccd-gw"
+  key_vault_id = "${data.azurerm_key_vault.s2s_vault.id}"
+}
+ 
+resource "azurerm_key_vault_secret" "ccd_gw_s2s_secret" {
+  name = "ccd-gw-s2s-secret"
+  value = "${data.azurerm_key_vault_secret.ccd_gw_s2s_key.value}"
+  key_vault_id = "${module.vault.key_vault_id}"
+}
 
 output "vaultName" {
   value = "${module.vault.key_vault_name}"
