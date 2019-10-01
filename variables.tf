@@ -88,3 +88,7 @@ variable "health_check_timeout" {
 variable "unhealthy_threshold" {
   default = "5"
 }
+
+variable "managed_identity_object_id" {
+  default = ""
+}
