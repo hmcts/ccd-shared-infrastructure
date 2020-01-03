@@ -24,7 +24,7 @@ module "appGw" {
   wafName           = "${var.product}-appGW"
   resourcegroupname = "${azurerm_resource_group.rg.name}"
   use_authentication_cert = "true"
-  wafFileUploadLimit = "100"
+  wafFileUploadLimit = "500"
   wafMaxRequestBodySize = "128"
   common_tags = "${local.tags}"
 
