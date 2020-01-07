@@ -92,3 +92,7 @@ variable "unhealthy_threshold" {
 variable "managed_identity_object_id" {
   default = ""
 }
+
+variable "file_upload_limit" {
+  default = "500"
+}
