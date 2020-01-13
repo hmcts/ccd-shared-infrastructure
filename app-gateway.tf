@@ -109,6 +109,17 @@ module "appGw" {
       HostName                       = "${var.external_hostname_gateway}"
     },
     {
+      name                           = "backend-80-nocookies-gateway-documents"
+      port                           = 80
+      Protocol                       = "Http"
+      AuthenticationCertificates     = ""
+      CookieBasedAffinity            = "Disabled"
+      probeEnabled                   = "True"
+      probe                          = "http-probe-gateway-documents"
+      PickHostNameFromBackendAddress = "False"
+      HostName                       = "${var.external_hostname_gateway}"
+    },
+    {
       name                           = "backend-80-nocookies-www"
       port                           = 80
       Protocol                       = "Http"
@@ -169,26 +180,26 @@ module "appGw" {
     {
       name                       = "http-url-path-map-gateway"
       defaultBackendAddressPool  = "${var.product}-${var.env}-backend-pool"
-      defaultBackendHttpSettings = "backend-80-nocookies-gateway"
+      defaultBackendHttpSettings = "backend-80-nocookies-gateway-documents"
       pathRules                  = [
         {
           name                = "http-url-path-map-gateway-rule-palo-alto"
           paths               = ["/documents"]
           backendAddressPool  = "${var.product}-${var.env}-palo-alto"
-          backendHttpSettings = "backend-80-nocookies-gateway"
+          backendHttpSettings = "backend-80-nocookies-gateway-documents"
         }
       ]
     },
     {
       name                       = "https-url-path-map-gateway"
       defaultBackendAddressPool  = "${var.product}-${var.env}-backend-pool"
-      defaultBackendHttpSettings = "backend-80-nocookies-gateway"
+      defaultBackendHttpSettings = "backend-80-nocookies-gateway-documents"
       pathRules                  = [
         {
           name                = "https-url-path-map-gateway-rule-palo-alto"
           paths               = ["/documents"]
           backendAddressPool  = "${var.product}-${var.env}-palo-alto"
-          backendHttpSettings = "backend-80-nocookies-gateway"
+          backendHttpSettings = "backend-80-nocookies-gateway-documents"
         }
       ]
     }
@@ -201,6 +212,18 @@ module "appGw" {
       path                                = "/"
       interval                            = "${var.health_check_interval}"
       timeout                             = "${var.health_check_timeout}"
+      unhealthyThreshold                  = "${var.unhealthy_threshold}"
+      pickHostNameFromBackendHttpSettings = "false"
+      backendHttpSettings                 = "backend-80-nocookies-gateway"
+      host                                = "${var.external_hostname_gateway}"
+      healthyStatusCodes                  = "200-404"                  // MS returns 400 on /, allowing more codes in case they change it
+    },
+    {
+      name                                = "http-probe-gateway-documents"
+      protocol                            = "Http"
+      path                                = "/"
+      interval                            = "${var.documents_timeout}"
+      timeout                             = "${var.documents_timeout}"
       unhealthyThreshold                  = "${var.unhealthy_threshold}"
       pickHostNameFromBackendHttpSettings = "false"
       backendHttpSettings                 = "backend-80-nocookies-gateway"
