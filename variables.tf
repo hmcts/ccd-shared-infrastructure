@@ -77,7 +77,7 @@ variable "external_hostname_www" {
 }
 
 // http parameters
-variable "documents_timeout" {
+variable "documents_request_timeout" {
   default = "150"
 }
 
