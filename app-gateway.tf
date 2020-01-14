@@ -222,7 +222,7 @@ module "appGw" {
       name                                = "http-probe-gateway-documents"
       protocol                            = "Http"
       path                                = "/"
-      interval                            = "${var.health_check_interval}"
+      interval                            = "${var.documents_timeout}"
       timeout                             = "${var.documents_timeout}"
       unhealthyThreshold                  = "${var.unhealthy_threshold}"
       pickHostNameFromBackendHttpSettings = "false"
