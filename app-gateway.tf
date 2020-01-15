@@ -226,7 +226,7 @@ module "appGw" {
       timeout                             = "${var.documents_request_timeout}"
       unhealthyThreshold                  = "${var.unhealthy_threshold}"
       pickHostNameFromBackendHttpSettings = "false"
-      backendHttpSettings                 = "backend-80-nocookies-gateway"
+      backendHttpSettings                 = "backend-80-nocookies-gateway-documents"
       host                                = "${var.external_hostname_gateway}"
       healthyStatusCodes                  = "200-404"                  // MS returns 400 on /, allowing more codes in case they change it
     },
