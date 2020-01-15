@@ -78,7 +78,7 @@ variable "external_hostname_www" {
 
 // http parameters
 variable "documents_request_timeout" {
-  default = "150"
+  default = "330"
 }
 
 variable "health_check_interval" {
