@@ -115,9 +115,10 @@ module "appGw" {
       AuthenticationCertificates     = ""
       CookieBasedAffinity            = "Disabled"
       probeEnabled                   = "True"
-      probe                          = "http-probe-gateway-documents"
+      probe                          = "http-probe-gateway"
       PickHostNameFromBackendAddress = "False"
       HostName                       = "${var.external_hostname_gateway}"
+      timeout                        = "${var.documents_request_timeout}"
     },
     {
       name                           = "backend-80-nocookies-www"
@@ -215,18 +216,6 @@ module "appGw" {
       unhealthyThreshold                  = "${var.unhealthy_threshold}"
       pickHostNameFromBackendHttpSettings = "false"
       backendHttpSettings                 = "backend-80-nocookies-gateway"
-      host                                = "${var.external_hostname_gateway}"
-      healthyStatusCodes                  = "200-404"                  // MS returns 400 on /, allowing more codes in case they change it
-    },
-    {
-      name                                = "http-probe-gateway-documents"
-      protocol                            = "Http"
-      path                                = "/"
-      interval                            = "${var.documents_request_timeout}"
-      timeout                             = "${var.documents_request_timeout}"
-      unhealthyThreshold                  = "${var.unhealthy_threshold}"
-      pickHostNameFromBackendHttpSettings = "false"
-      backendHttpSettings                 = "backend-80-nocookies-gateway-documents"
       host                                = "${var.external_hostname_gateway}"
       healthyStatusCodes                  = "200-404"                  // MS returns 400 on /, allowing more codes in case they change it
     },
