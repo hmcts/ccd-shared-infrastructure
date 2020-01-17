@@ -92,3 +92,11 @@ variable "unhealthy_threshold" {
 variable "managed_identity_object_id" {
   default = ""
 }
+
+variable "file_upload_limit" {
+  default = "500"
+}
+
+variable "documents_request_timeout" {
+  default = "300"
+}
