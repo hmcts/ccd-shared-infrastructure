@@ -27,6 +27,7 @@ module "appGw" {
   wafFileUploadLimit = "${var.file_upload_limit}"
   wafMaxRequestBodySize = "128"
   common_tags = "${local.tags}"
+  size              = "WAF_Large"
 
   # vNet connections
   gatewayIpConfigurations = [
