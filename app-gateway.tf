@@ -24,9 +24,10 @@ module "appGw" {
   wafName           = "${var.product}-appGW"
   resourcegroupname = "${azurerm_resource_group.rg.name}"
   use_authentication_cert = "true"
-  wafFileUploadLimit = "100"
+  wafFileUploadLimit = "${var.file_upload_limit}"
   wafMaxRequestBodySize = "128"
   common_tags = "${local.tags}"
+  size              = "WAF_Large"
 
   # vNet connections
   gatewayIpConfigurations = [
@@ -109,6 +110,18 @@ module "appGw" {
       HostName                       = "${var.external_hostname_gateway}"
     },
     {
+      name                           = "backend-80-nocookies-gateway-documents"
+      port                           = 80
+      Protocol                       = "Http"
+      AuthenticationCertificates     = ""
+      CookieBasedAffinity            = "Disabled"
+      probeEnabled                   = "True"
+      probe                          = "http-probe-gateway"
+      PickHostNameFromBackendAddress = "False"
+      HostName                       = "${var.external_hostname_gateway}"
+      timeout                        = "${var.documents_request_timeout}"
+    },
+    {
       name                           = "backend-80-nocookies-www"
       port                           = 80
       Protocol                       = "Http"
@@ -175,7 +188,7 @@ module "appGw" {
           name                = "http-url-path-map-gateway-rule-palo-alto"
           paths               = ["/documents"]
           backendAddressPool  = "${var.product}-${var.env}-palo-alto"
-          backendHttpSettings = "backend-80-nocookies-gateway"
+          backendHttpSettings = "backend-80-nocookies-gateway-documents"
         }
       ]
     },
@@ -188,7 +201,7 @@ module "appGw" {
           name                = "https-url-path-map-gateway-rule-palo-alto"
           paths               = ["/documents"]
           backendAddressPool  = "${var.product}-${var.env}-palo-alto"
-          backendHttpSettings = "backend-80-nocookies-gateway"
+          backendHttpSettings = "backend-80-nocookies-gateway-documents"
         }
       ]
     }
