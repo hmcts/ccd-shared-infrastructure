@@ -17,7 +17,7 @@ data "azurerm_subnet" "ase_subnet" {
 
 module "appGw" {
   # using a specific branch for WAF rule exceptions only applicable to CCD.
-  source            = "git@github.com:hmcts/cnp-module-waf?ref=njrich28-patch-1"
+  source            = "git@github.com:hmcts/cnp-module-waf?ref=ccd-waf"
   env               = "${var.env}"
   subscription      = "${var.subscription}"
   location          = "${var.location}"
