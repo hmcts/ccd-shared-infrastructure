@@ -119,7 +119,7 @@ module "appGw" {
       probe                          = "http-probe-gateway"
       PickHostNameFromBackendAddress = "False"
       HostName                       = "${var.external_hostname_gateway}"
-      requestTimeout                 = 400
+      requestTimeout                 = 301
     },
     {
       name                           = "backend-80-nocookies-www"
