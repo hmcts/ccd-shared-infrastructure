@@ -14,10 +14,6 @@ variable "subscription" {
   type = "string"
 }
 
-variable "ilbIp" {
-  type = "string"
-}
-
 variable "location" {
   type    = "string"
   description = "The location where you would like to deploy your infrastructure"
@@ -32,20 +28,11 @@ variable "jenkins_AAD_objectId" {
   description = "(Required) The Azure AD object ID of a user, service principal or security group in the Azure Active Directory tenant for the vault. The object ID must be unique for the list of access policies."
 }
 
-
-// ASP Specific Variables
-variable "asp_capacity" {
-  type    = "string"
-  default = "2"
-}
-
-
 variable "application_type" {
   type = "string"
   default = "Web"
   description = "Type of Application Insights (Web/Other)"
 }
-
 
 // TAG SPECIFIC VARIABLES
 variable "common_tags" {
@@ -64,39 +51,6 @@ variable "destroy_me" {
   default     = "No"
 }
 
-variable "external_cert_name" {
-  type = "string"
-}
-
-variable "external_hostname_gateway" {
-  type = "string"
-}
-
-variable "external_hostname_www" {
-  type = "string"
-}
-
-// http parameters
-variable "health_check_interval" {
-  default = "30"
-}
-
-variable "health_check_timeout" {
-  default = "30"
-}
-
-variable "unhealthy_threshold" {
-  default = "5"
-}
-
 variable "managed_identity_object_id" {
   default = ""
-}
-
-variable "file_upload_limit" {
-  default = "500"
-}
-
-variable "documents_request_timeout" {
-  default = "300"
 }
