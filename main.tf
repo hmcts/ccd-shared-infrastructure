@@ -3,8 +3,6 @@ provider "azurerm" {
 }
 
 locals {
-  ase_name = "core-compute-${var.env}"
-
   tags = "${merge(
     var.common_tags,
     map(
