@@ -31,7 +31,6 @@ resource "azurerm_key_vault_secret" "ccd_gw_s2s_secret" {
 
 data "azurerm_key_vault_secret" "alert_ccd_email_secret" {
   name      = "ccd-alert-email"
-  value     = "${data.azurerm_key_vault_secret.alert_ccd_email_secret.value}"
   key_vault_id = "${module.vault.key_vault_id}"
 }
 
