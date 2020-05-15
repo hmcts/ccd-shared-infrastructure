@@ -4,7 +4,7 @@ module "ccd-cpu-alert" {
   location          = "${azurerm_application_insights.appinsights.location}"
   app_insights_name = "${azurerm_application_insights.appinsights.name}"
 
-  enabled    = "${var.env == "prod"}"
+  #enabled    = "${var.env == "prod"}"
   alert_name = "ccd-cpu-alert"
   alert_desc = "Fires when Max CPU Processor Time is Greater than 85% within a 10 minute window timeframe"
 
