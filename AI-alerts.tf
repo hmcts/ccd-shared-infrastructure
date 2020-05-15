@@ -3,8 +3,7 @@ module "ccd-cpu-alert" {
   source            = "git@github.com:hmcts/cnp-module-metric-alert"
   location          = "${azurerm_application_insights.appinsights.location}"
   app_insights_name = "${azurerm_application_insights.appinsights.name}"
-
-  #   enabled    = "${var.env == "prod"}"
+  enabled    = "${var.env == "prod"}"
   alert_name = "ccd-cpu-alert"
   alert_desc = "Fires when Max CPU Processor Time is Greater than 85% within a 10 minute window timeframe."
 
@@ -28,8 +27,7 @@ module "ccd-mem-alert" {
   source            = "git@github.com:hmcts/cnp-module-metric-alert"
   location          = "${azurerm_application_insights.appinsights.location}"
   app_insights_name = "${azurerm_application_insights.appinsights.name}"
-
-  #   enabled    = "${var.env == "prod"}"
+  enabled    = "${var.env == "prod"}"
   alert_name = "ccd-mem-alert"
   alert_desc = "Fires when time in GC is over 3.4s within a 10 minute window timeframe."
 
