@@ -1,15 +1,14 @@
-module "alert-action-group" {
-  source   = "git@github.com:hmcts/cnp-module-action-group"
-  location = "global"
-  env      = "${var.env}"
 
-  resourcegroup_name     = "${azurerm_resource_group.rg.name}"
-  action_group_name      = "CCD Alerts (${var.env})"
-  short_name             = "ccd_alerts"
-  email_receiver_name    = "CCD Alerts And Monitoring"
-  email_receiver_address = "${data.azurerm_key_vault_secret.alert_ccd_email_secret.value}"
-}
+resource "azurerm_monitor_action_group" "ccd-alert-action-group" {
+  name                = "CCD Alerts (${var.env})"
+  resource_group_name = "${azurerm_resource_group.rg.name}"
+  short_name          = "ccd_alerts"
+  email_receiver {
+    name          = "CCD Alerts And Monitoring"
+    email_address = "${data.azurerm_key_vault_secret.alert_ccd_email_secret.value}"
+  }
 
-output "action_group_name" {
-  value = "${module.alert-action-group.action_group_name}"
+
+
+
 }
