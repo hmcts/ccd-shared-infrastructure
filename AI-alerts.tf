@@ -10,7 +10,7 @@ module "ccd-cpu-alert" {
   app_insights_query = <<EOF
 performanceCounters
 | where category == "Processor" and name == "% Processor Time"
-| summarize ['CPU'] = max(value) 
+| summarize ['CPU'] = avg(value) 
 EOF
 
   frequency_in_minutes       = 10
@@ -35,7 +35,7 @@ module "ccd-mem-alert" {
 performanceCounters
 | where counter == "GC Total Time" 
 | where cloud_RoleName in ("ccd-user-profile", "ccd-data-store", "ccd-definition-store")
-| summarize ['x'] = max(value) 
+| summarize ['x'] = avg(value) 
 | extend todecimal(x) 
 EOF
 
@@ -61,7 +61,7 @@ resource "azurerm_monitor_metric_alert" "pg-user-prof-db-cpu" {
   criteria {
     metric_namespace = "Microsoft.DBforPostgreSQL/servers"
     metric_name      = "cpu_percent"
-    aggregation      = "Maximum"
+    aggregation      = "Average"
     operator         = "GreaterThan"
     threshold        = 80
   }
@@ -82,7 +82,7 @@ resource "azurerm_monitor_metric_alert" "pg-user-prof-db-mem" {
   criteria {
     metric_namespace = "Microsoft.DBforPostgreSQL/servers"
     metric_name      = "memory_percent"
-    aggregation      = "Maximum"
+    aggregation      = "Average"
     operator         = "GreaterThan"
     threshold        = 80
   }
@@ -103,7 +103,7 @@ resource "azurerm_monitor_metric_alert" "pg-data-store-db-cpu" {
   criteria {
     metric_namespace = "Microsoft.DBforPostgreSQL/servers"
     metric_name      = "cpu_percent"
-    aggregation      = "Maximum"
+    aggregation      = "Average"
     operator         = "GreaterThan"
     threshold        = 80
   }
@@ -124,7 +124,7 @@ resource "azurerm_monitor_metric_alert" "pg-data-store-db-mem" {
   criteria {
     metric_namespace = "Microsoft.DBforPostgreSQL/servers"
     metric_name      = "memory_percent"
-    aggregation      = "Maximum"
+    aggregation      = "Average"
     operator         = "GreaterThan"
     threshold        = 80
   }
@@ -145,7 +145,7 @@ resource "azurerm_monitor_metric_alert" "pg-def-store-db-cpu" {
   criteria {
     metric_namespace = "Microsoft.DBforPostgreSQL/servers"
     metric_name      = "cpu_percent"
-    aggregation      = "Maximum"
+    aggregation      = "Average"
     operator         = "GreaterThan"
     threshold        = 80
   }
@@ -166,7 +166,7 @@ resource "azurerm_monitor_metric_alert" "pg-def-store-db-mem" {
   criteria {
     metric_namespace = "Microsoft.DBforPostgreSQL/servers"
     metric_name      = "memory_percent"
-    aggregation      = "Maximum"
+    aggregation      = "Average"
     operator         = "GreaterThan"
     threshold        = 80
   }
