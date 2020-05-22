@@ -91,6 +91,27 @@ resource "azurerm_monitor_metric_alert" "pg-user-prof-db-mem" {
   }
 }
 
+resource "azurerm_monitor_metric_alert" "pg-user-prof-db-storage" {
+  name                = "pg-db-user-prof-storage"
+  resource_group_name = "${azurerm_resource_group.rg.name}"
+  # enabled             = "${var.env == "prod"}"
+  scopes              = ["/subscriptions/${var.subscription_id}/resourceGroups/ccd-user-profile-api-postgres-db-data-${var.env}/providers/Microsoft.DBforPostgreSQL/servers/ccd-user-profile-api-postgres-db-${var.env}"]
+  description         = "Action will be triggered when the Storage utilization is greater than 95%"
+  severity            = "1"
+  frequency           = "PT5M"
+
+  criteria {
+    metric_namespace = "Microsoft.DBforPostgreSQL/servers"
+    metric_name      = "storage_percent"
+    aggregation      = "Average"
+    operator         = "GreaterThan"
+    threshold        = 95
+  }
+  action {
+    action_group_id = "${azurerm_monitor_action_group.ccd-alert-action-group.id}"
+  }
+}
+
 resource "azurerm_monitor_metric_alert" "pg-data-store-db-cpu" {
   name                = "pg-db-data-store-cpu"
   resource_group_name = "${azurerm_resource_group.rg.name}"
@@ -133,6 +154,27 @@ resource "azurerm_monitor_metric_alert" "pg-data-store-db-mem" {
   }
 }
 
+resource "azurerm_monitor_metric_alert" "pg-data-store-db-storage" {
+  name                = "pg-db-data-store-storage"
+  resource_group_name = "${azurerm_resource_group.rg.name}"
+  # enabled             = "${var.env == "prod"}"
+  scopes              = ["/subscriptions/${var.subscription_id}/resourceGroups/ccd-data-store-api-postgres-db-data-${var.env}/providers/Microsoft.DBforPostgreSQL/servers/ccd-data-store-api-postgres-db-${var.env}"]
+  description         = "Action will be triggered when the Storage utilization is greater than 95%"
+  severity            = "1"
+  frequency           = "PT5M"
+
+  criteria {
+    metric_namespace = "Microsoft.DBforPostgreSQL/servers"
+    metric_name      = "storage_percent"
+    aggregation      = "Average"
+    operator         = "GreaterThan"
+    threshold        = 95
+  }
+  action {
+    action_group_id = "${azurerm_monitor_action_group.ccd-alert-action-group.id}"
+  }
+}
+
 resource "azurerm_monitor_metric_alert" "pg-def-store-db-cpu" {
   name                = "pg-db-def-store-cpu"
   resource_group_name = "${azurerm_resource_group.rg.name}"
@@ -169,6 +211,27 @@ resource "azurerm_monitor_metric_alert" "pg-def-store-db-mem" {
     aggregation      = "Average"
     operator         = "GreaterThan"
     threshold        = 80
+  }
+  action {
+    action_group_id = "${azurerm_monitor_action_group.ccd-alert-action-group.id}"
+  }
+}
+
+resource "azurerm_monitor_metric_alert" "pg-def-store-db-storage" {
+  name                = "pg-db-def-store-storage"
+  resource_group_name = "${azurerm_resource_group.rg.name}"
+  # enabled             = "${var.env == "prod"}"
+  scopes              = ["/subscriptions/${var.subscription_id}/resourceGroups/ccd-definition-store-api-postgres-db-data-${var.env}/providers/Microsoft.DBforPostgreSQL/servers/ccd-definition-store-api-postgres-db-${var.env}"]
+  description         = "Action will be triggered when the Storage utilization is greater than 95%"
+  severity            = "1"
+  frequency           = "PT5M"
+
+  criteria {
+    metric_namespace = "Microsoft.DBforPostgreSQL/servers"
+    metric_name      = "storage_percent"
+    aggregation      = "Average"
+    operator         = "GreaterThan"
+    threshold        = 95
   }
   action {
     action_group_id = "${azurerm_monitor_action_group.ccd-alert-action-group.id}"
