@@ -3,7 +3,7 @@ module "ccd-cpu-alert" {
   source            = "git@github.com:hmcts/cnp-module-metric-alert"
   location          = "${azurerm_application_insights.appinsights.location}"
   app_insights_name = "${azurerm_application_insights.appinsights.name}"
-  # enabled    = "${var.env == "prod"}"
+  enabled    = "${var.env == "prod"}"
   alert_name = "ccd-cpu-alert"
   alert_desc = "Fires when Max CPU Processor Time is Greater than 85% within a 10 minute window timeframe"
 
@@ -27,7 +27,7 @@ module "ccd-mem-alert" {
   source            = "git@github.com:hmcts/cnp-module-metric-alert"
   location          = "${azurerm_application_insights.appinsights.location}"
   app_insights_name = "${azurerm_application_insights.appinsights.name}"
-  # enabled    = "${var.env == "prod"}"
+  enabled    = "${var.env == "prod"}"
   alert_name = "ccd-mem-alert"
   alert_desc = "Fires when time in GC is over 3.4s within a 10 minute window timeframe."
 
@@ -52,7 +52,7 @@ EOF
 resource "azurerm_monitor_metric_alert" "pg-user-prof-db-cpu" {
   name                = "pg-db-user-prof-cpu"
   resource_group_name = "${azurerm_resource_group.rg.name}"
-  # enabled             = "${var.env == "prod"}"
+  enabled             = "${var.env == "prod"}"
   scopes              = ["/subscriptions/${var.subscription_id}/resourceGroups/ccd-user-profile-api-postgres-db-data-${var.env}/providers/Microsoft.DBforPostgreSQL/servers/ccd-user-profile-api-postgres-db-${var.env}"]
   description         = "Action will be triggered when the CPU utilization is greater than 80%"
   severity            = "1"
@@ -73,7 +73,7 @@ resource "azurerm_monitor_metric_alert" "pg-user-prof-db-cpu" {
 resource "azurerm_monitor_metric_alert" "pg-user-prof-db-mem" {
   name                = "pg-db-user-prof-mem"
   resource_group_name = "${azurerm_resource_group.rg.name}"
-  # enabled             = "${var.env == "prod"}"
+  enabled             = "${var.env == "prod"}"
   scopes              = ["/subscriptions/${var.subscription_id}/resourceGroups/ccd-user-profile-api-postgres-db-data-${var.env}/providers/Microsoft.DBforPostgreSQL/servers/ccd-user-profile-api-postgres-db-${var.env}"]
   description         = "Action will be triggered when the Memory utilization is greater than 80%"
   severity            = "1"
@@ -94,7 +94,7 @@ resource "azurerm_monitor_metric_alert" "pg-user-prof-db-mem" {
 resource "azurerm_monitor_metric_alert" "pg-user-prof-db-storage" {
   name                = "pg-db-user-prof-storage"
   resource_group_name = "${azurerm_resource_group.rg.name}"
-  # enabled             = "${var.env == "prod"}"
+  enabled             = "${var.env == "prod"}"
   scopes              = ["/subscriptions/${var.subscription_id}/resourceGroups/ccd-user-profile-api-postgres-db-data-${var.env}/providers/Microsoft.DBforPostgreSQL/servers/ccd-user-profile-api-postgres-db-${var.env}"]
   description         = "Action will be triggered when the Storage utilization is greater than 95%"
   severity            = "1"
@@ -115,7 +115,7 @@ resource "azurerm_monitor_metric_alert" "pg-user-prof-db-storage" {
 resource "azurerm_monitor_metric_alert" "pg-data-store-db-cpu" {
   name                = "pg-db-data-store-cpu"
   resource_group_name = "${azurerm_resource_group.rg.name}"
-  # enabled             = "${var.env == "prod"}"
+  enabled             = "${var.env == "prod"}"
   scopes              = ["/subscriptions/${var.subscription_id}/resourceGroups/ccd-data-store-api-postgres-db-data-${var.env}/providers/Microsoft.DBforPostgreSQL/servers/ccd-data-store-api-postgres-db-${var.env}"]
   description         = "Action will be triggered when the CPU utilization is greater than 80%"
   severity            = "1"
@@ -136,7 +136,7 @@ resource "azurerm_monitor_metric_alert" "pg-data-store-db-cpu" {
 resource "azurerm_monitor_metric_alert" "pg-data-store-db-mem" {
   name                = "pg-db-data-store-mem"
   resource_group_name = "${azurerm_resource_group.rg.name}"
-  # enabled             = "${var.env == "prod"}"
+  enabled             = "${var.env == "prod"}"
   scopes              = ["/subscriptions/${var.subscription_id}/resourceGroups/ccd-data-store-api-postgres-db-data-${var.env}/providers/Microsoft.DBforPostgreSQL/servers/ccd-data-store-api-postgres-db-${var.env}"]
   description         = "Action will be triggered when the Memory utilization is greater than 80%"
   severity            = "1"
@@ -157,7 +157,7 @@ resource "azurerm_monitor_metric_alert" "pg-data-store-db-mem" {
 resource "azurerm_monitor_metric_alert" "pg-data-store-db-storage" {
   name                = "pg-db-data-store-storage"
   resource_group_name = "${azurerm_resource_group.rg.name}"
-  # enabled             = "${var.env == "prod"}"
+  enabled             = "${var.env == "prod"}"
   scopes              = ["/subscriptions/${var.subscription_id}/resourceGroups/ccd-data-store-api-postgres-db-data-${var.env}/providers/Microsoft.DBforPostgreSQL/servers/ccd-data-store-api-postgres-db-${var.env}"]
   description         = "Action will be triggered when the Storage utilization is greater than 95%"
   severity            = "1"
@@ -178,8 +178,8 @@ resource "azurerm_monitor_metric_alert" "pg-data-store-db-storage" {
 resource "azurerm_monitor_metric_alert" "pg-def-store-db-cpu" {
   name                = "pg-db-def-store-cpu"
   resource_group_name = "${azurerm_resource_group.rg.name}"
-  # enabled             = "${var.env == "prod"}"
-    scopes              = ["/subscriptions/${var.subscription_id}/resourceGroups/ccd-definition-store-api-postgres-db-data-${var.env}/providers/Microsoft.DBforPostgreSQL/servers/ccd-definition-store-api-postgres-db-${var.env}"]
+  enabled             = "${var.env == "prod"}"
+  scopes              = ["/subscriptions/${var.subscription_id}/resourceGroups/ccd-definition-store-api-postgres-db-data-${var.env}/providers/Microsoft.DBforPostgreSQL/servers/ccd-definition-store-api-postgres-db-${var.env}"]
   description         = "Action will be triggered when the CPU utilization is greater than 80%"
   severity            = "1"
   frequency           = "PT5M"
@@ -199,7 +199,7 @@ resource "azurerm_monitor_metric_alert" "pg-def-store-db-cpu" {
 resource "azurerm_monitor_metric_alert" "pg-def-store-db-mem" {
   name                = "pg-db-def-store-mem"
   resource_group_name = "${azurerm_resource_group.rg.name}"
-  # enabled             = "${var.env == "prod"}"
+  enabled             = "${var.env == "prod"}"
   scopes              = ["/subscriptions/${var.subscription_id}/resourceGroups/ccd-definition-store-api-postgres-db-data-${var.env}/providers/Microsoft.DBforPostgreSQL/servers/ccd-definition-store-api-postgres-db-${var.env}"]
   description         = "Action will be triggered when the Memory utilization is greater than 80%"
   severity            = "1"
@@ -220,7 +220,7 @@ resource "azurerm_monitor_metric_alert" "pg-def-store-db-mem" {
 resource "azurerm_monitor_metric_alert" "pg-def-store-db-storage" {
   name                = "pg-db-def-store-storage"
   resource_group_name = "${azurerm_resource_group.rg.name}"
-  # enabled             = "${var.env == "prod"}"
+  enabled             = "${var.env == "prod"}"
   scopes              = ["/subscriptions/${var.subscription_id}/resourceGroups/ccd-definition-store-api-postgres-db-data-${var.env}/providers/Microsoft.DBforPostgreSQL/servers/ccd-definition-store-api-postgres-db-${var.env}"]
   description         = "Action will be triggered when the Storage utilization is greater than 95%"
   severity            = "1"
