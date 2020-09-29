@@ -1,5 +1,5 @@
 provider "azurerm" {
-  version = "1.22.1"
+  features {}
 }
 
 locals {
@@ -15,7 +15,6 @@ locals {
 // Shared Resource Group
 resource "azurerm_resource_group" "rg" {
   name     = "${var.product}-shared-${var.env}"
-  location = "${var.location}"
-
-  tags = "${local.tags}"
+  location = var.location
+  tags     = local.tags
 }

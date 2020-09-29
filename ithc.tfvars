@@ -1,1 +1,1 @@
-managed_identity_object_id="10075936-8439-4993-9e5d-d31cc256e571"
+managed_identity_object_id = "10075936-8439-4993-9e5d-d31cc256e571"
