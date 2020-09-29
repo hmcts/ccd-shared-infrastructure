@@ -66,7 +66,7 @@ output "storage_account_name" {
 
 // dm-store blob Storage Account
 module "dm_store_storage_account" {
-  source                   = "git@github.com:hmcts/cnp-module-storage-account.git?ref=azurermv2"
+  source                   = "git@github.com:hmcts/cnp-module-storage-account?ref=azurermv2"
   env                      = "${var.env}"
   storage_account_name     = "dmstoredoc${var.env}"
   resource_group_name      = "${azurerm_resource_group.rg.name}"
