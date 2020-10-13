@@ -3,7 +3,7 @@
 
 // Shared Storage Account
 module "storage_account" {
-  source                    = "git@github.com:hmcts/cnp-module-storage-account.git?ref=0.0.1"
+  source                    = "git@github.com:hmcts/cnp-module-storage-account.git?ref=azurermv2"
   env                       = "${var.env}"
   storage_account_name      = "${var.product}shared${var.env}"
   resource_group_name       = "${azurerm_resource_group.rg.name}"
@@ -13,8 +13,6 @@ module "storage_account" {
   account_replication_type  = "LRS"
   access_tier               = "Hot"
 
-  enable_blob_encryption    = true
-  enable_file_encryption    = true
   enable_https_traffic_only = true
 
   // Tags
@@ -68,7 +66,7 @@ output "storage_account_name" {
 
 // dm-store blob Storage Account
 module "dm_store_storage_account" {
-  source                    = "git@github.com:hmcts/cnp-module-storage-account.git?ref=0.0.1"
+  source                    = "git@github.com:hmcts/cnp-module-storage-account.git?ref=azurermv2"
   env                       = "${var.env}"
   storage_account_name      = "dmstoredoc${var.env}"
   resource_group_name       = "${azurerm_resource_group.rg.name}"
@@ -78,8 +76,6 @@ module "dm_store_storage_account" {
   account_replication_type  = "LRS"
   access_tier               = "Hot"
 
-  enable_blob_encryption    = true
-  enable_file_encryption    = true
   enable_https_traffic_only = true
 
   // Tags
