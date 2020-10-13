@@ -1,5 +1,5 @@
 module "vault" {
-  source = "git@github.com:hmcts/cnp-module-key-vault?ref=master"
+  source = "git@github.com:hmcts/cnp-module-key-vault?ref=azurermv2"
   name = "ccd-${var.env}"
   product = "${var.product}"
   env = "${var.env}"
