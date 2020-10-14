@@ -15,6 +15,8 @@ module "storage_account" {
 
   enable_https_traffic_only = true
 
+  default_action = "Allow"
+
   // Tags
   common_tags  = "${local.tags}"
   team_contact = "${var.team_contact}"
