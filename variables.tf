@@ -64,5 +64,5 @@ variable "sku" {
 variable "zoneRedundant" {
   type = string
   default = "false"
-  description = "zoneRedundant (True or False)"
+  description = "zoneRedundant (true or false)"
 }
