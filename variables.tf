@@ -54,3 +54,15 @@ variable "destroy_me" {
 variable "managed_identity_object_id" {
   default = ""
 }
+
+variable "sku" {
+  type = "string"
+  default = "Standard"
+  description = "SKU type(Basic, Standard and Premium)"
+}
+
+variable "zoneRedundant" {
+  type = bool
+  default = false
+  description = "zoneRedundant (True or False)"
+}
