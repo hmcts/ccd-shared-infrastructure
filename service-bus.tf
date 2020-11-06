@@ -11,8 +11,8 @@ module "servicebus-namespace" {
   resource_group_name = azurerm_resource_group.rg.name
   env                 = var.env
   common_tags         = local.tags
-  sku                 = "Premium"
-  zoneRedundant       = true
+  sku                 = var.sku
+  zoneRedundant       = var.zoneRedundant
 }
 
 module "events-topic" {
