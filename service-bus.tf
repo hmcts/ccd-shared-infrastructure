@@ -20,5 +20,4 @@ module "events-topic" {
   name                = local.events_topic_name
   namespace_name      = local.servicebus_namespace_name
   resource_group_name = local.resource_group_name
-  depends_on          = [module.servicebus-namespace]
 }
