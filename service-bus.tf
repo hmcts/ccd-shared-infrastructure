@@ -1,5 +1,5 @@
 locals {
-  events_topic_name         = "${var.product}-events-topic-${var.env}"
+  events_topic_name         = "${var.product}-case-events-${var.env}"
   servicebus_namespace_name = "${var.product}-servicebus-${var.env}"
   resource_group_name       = azurerm_resource_group.rg.name
 }
@@ -12,7 +12,7 @@ module "servicebus-namespace" {
   env                 = var.env
   common_tags         = local.tags
   sku                 = var.sku
-  zoneRedundant       = var.zoneRedundant
+  zoneRedundant       = (var.sku != "Premium" ? "false" : "true")
 }
 
 module "events-topic" {
