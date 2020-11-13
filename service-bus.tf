@@ -17,7 +17,7 @@ module "servicebus-namespace" {
 
 module "events-topic" {
   source              = "git@github.com:hmcts/terraform-module-servicebus-topic?ref=master"
-  name                = local.events_topic_name 
+  name                = local.events_topic_name
   namespace_name      = local.servicebus_namespace_name
   resource_group_name = local.resource_group_name
   depends_on          = [module.servicebus-namespace]
