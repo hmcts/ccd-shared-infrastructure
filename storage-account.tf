@@ -17,6 +17,8 @@ module "storage_account" {
 
   default_action = "Allow"
 
+  enable_data_protection = var.ccd_storage_account_enable_data_protection
+
   // Tags
   common_tags  = "${local.tags}"
   team_contact = "${var.team_contact}"
@@ -81,6 +83,8 @@ module "dm_store_storage_account" {
   enable_https_traffic_only = true
 
   default_action = "Allow"
+
+  enable_data_protection = var.dmstore_storage_account_enable_data_protection
 
   // Tags
   common_tags  = "${local.tags}"
