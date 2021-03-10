@@ -34,6 +34,18 @@ variable "application_type" {
   description = "Type of Application Insights (Web/Other)"
 }
 
+variable "ccd_storage_account_enable_data_protection" {
+  type = bool
+  description = "(Optional) Boolean flag which controls if Data Protection are enabled for Blob storage, see https://docs.microsoft.com/en-us/azure/storage/blobs/versioning-overview for more information."
+  default = false
+}
+
+variable "dmstore_storage_account_enable_data_protection" {
+  type = bool
+  description = "(Optional) Boolean flag which controls if Data Protection are enabled for Blob storage, see https://docs.microsoft.com/en-us/azure/storage/blobs/versioning-overview for more information."
+  default = false
+}
+
 // TAG SPECIFIC VARIABLES
 variable "common_tags" {
   type = map
