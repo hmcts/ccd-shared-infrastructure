@@ -1,7 +1,3 @@
-provider "azurerm" {
-  version = "2.50.0"
-  features {}
-}
 
 locals {
   tags = "${merge(
