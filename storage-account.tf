@@ -1,5 +1,14 @@
 // Shared and specialised Storage Accounts
 
+locals {
+  auth_subnets = [
+    data.azurerm_subnet.jenkins_subnet.id,
+    data.azurerm_subnet.jenkins_aks_00.id,
+    data.azurerm_subnet.jenkins_aks_01.id,
+    data.azurerm_subnet.app_aks_00_subnet.id,
+    data.azurerm_subnet.app_aks_01_subnet.id
+  ]
+}
 
 // Shared Storage Account
 module "storage_account" {
@@ -15,7 +24,7 @@ module "storage_account" {
 
   enable_https_traffic_only = true
 
-  default_action = "Allow"
+  sa_subnets                = local.auth_subnets
 
   enable_data_protection = var.ccd_storage_account_enable_data_protection
 
