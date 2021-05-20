@@ -1,12 +1,14 @@
 // Shared and specialised Storage Accounts
 
 locals {
-  auth_subnets = [
+  sa_subnets = [
     data.azurerm_subnet.jenkins_subnet.id,
-    data.azurerm_subnet.jenkins_aks_00.id,
-    data.azurerm_subnet.jenkins_aks_01.id,
-    data.azurerm_subnet.app_aks_00_subnet.id,
-    data.azurerm_subnet.app_aks_01_subnet.id
+    data.azurerm_subnet.aks-00-mgmt.id,
+    data.azurerm_subnet.aks-01-mgmt.id,
+    data.azurerm_subnet.aks-00-infra.id,
+    data.azurerm_subnet.aks-01-infra.id,
+    data.azurerm_subnet.aks-00-preview.id,
+    data.azurerm_subnet.aks-01-preview.id
   ]
 }
 
@@ -24,7 +26,7 @@ module "storage_account" {
 
   enable_https_traffic_only = true
 
-  sa_subnets                = local.auth_subnets
+  sa_subnets                = local.sa_subnets
 
   enable_data_protection = var.ccd_storage_account_enable_data_protection
 
@@ -91,7 +93,7 @@ module "dm_store_storage_account" {
 
   enable_https_traffic_only = true
 
-  default_action = "Allow"
+  sa_subnets                = local.sa_subnets
 
   enable_data_protection = var.dmstore_storage_account_enable_data_protection
 
