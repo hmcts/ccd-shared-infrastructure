@@ -1,6 +1,9 @@
 // Shared and specialised Storage Accounts
 
 locals {
+  mgmt_network_name    = "core-cftptl-intsvc-vnet"
+  mgmt_network_rg_name = "aks-infra-cftptl-intsvc-rg"
+  
   sa_subnets = [
     data.azurerm_subnet.jenkins_subnet.id,
     data.azurerm_subnet.aks-00-mgmt.id,
