@@ -72,3 +72,9 @@ variable "sku" {
   default = "Standard"
   description = "SKU type(Basic, Standard and Premium)"
 }
+
+variable "mgmt_subscription_id" {}
+
+variable "aks_infra_subscription_id" {}
+
+variable "aks_preview_subscription_id" {}
