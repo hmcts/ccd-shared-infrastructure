@@ -4,20 +4,20 @@ provider "azurerm" {
 
 provider "azurerm" {
   alias           = "aks-infra"
-  subscription_id = "${var.aks_subscription_id}"
+  subscription_id = var.aks_subscription_id
   features {}
   skip_provider_registration = true
 }
 
 provider "azurerm" {
   alias           = "aks-preview"
-  subscription_id = "${var.aks_subscription_id}"
+  subscription_id = var.aks_subscription_id
   features {}
 }
 
 provider "azurerm" {
   alias           = "mgmt"
-  subscription_id = "${var.aks_subscription_id}"
+  subscription_id = var.aks_subscription_id
   features {}
 }
 
