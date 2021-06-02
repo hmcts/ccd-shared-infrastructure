@@ -3,16 +3,24 @@
 locals {
   mgmt_network_name    = "core-cftptl-intsvc-vnet"
   mgmt_network_rg_name = "aks-infra-cftptl-intsvc-rg"
-  
-  sa_subnets = [
+
+  sa_aat_subnets = [
     data.azurerm_subnet.jenkins_subnet.id,
     data.azurerm_subnet.aks-00-mgmt.id,
     data.azurerm_subnet.aks-01-mgmt.id,
     data.azurerm_subnet.aks-00-infra.id,
     data.azurerm_subnet.aks-01-infra.id,
     data.azurerm_subnet.aks-00-preview.id,
-    data.azurerm_subnet.aks-01-preview.id
-  ]
+  data.azurerm_subnet.aks-01-preview.id]
+
+  sa_other_subnets = [
+    data.azurerm_subnet.jenkins_subnet.id,
+    data.azurerm_subnet.aks-00-mgmt.id,
+    data.azurerm_subnet.aks-01-mgmt.id,
+    data.azurerm_subnet.aks-00-infra.id,
+  data.azurerm_subnet.aks-01-infra.id]
+
+  sa_subnets = split(",", var.env == "aat" ? join(",", local.sa_aat_subnets) : join(",", local.sa_other_subnets))
 }
 
 data "azurerm_virtual_network" "mgmt_vnet" {
@@ -96,7 +104,7 @@ module "storage_account" {
 
   enable_https_traffic_only = true
 
-  sa_subnets                = local.sa_subnets
+  sa_subnets = local.sa_subnets
 
   enable_data_protection = var.ccd_storage_account_enable_data_protection
 
@@ -163,7 +171,7 @@ module "dm_store_storage_account" {
 
   enable_https_traffic_only = true
 
-  sa_subnets                = local.sa_subnets
+  sa_subnets = local.sa_subnets
 
   enable_data_protection = var.dmstore_storage_account_enable_data_protection
 
