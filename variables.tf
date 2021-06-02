@@ -75,4 +75,4 @@ variable "sku" {
 
 variable "mgmt_subscription_id" {}
 variable "aks_subscription_id" {}
-variable "aks_preview_subscription_id" {}
+
