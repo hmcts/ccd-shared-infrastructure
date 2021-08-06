@@ -92,7 +92,7 @@ data "azurerm_subnet" "aks-01-preview" {
 
 // Shared Storage Account
 module "storage_account" {
-  source                   = "git@github.com:hmcts/cnp-module-storage-account?ref=tf_native_versioning"
+  source                   = "git@github.com:hmcts/cnp-module-storage-account.git?ref=tf_native_versioning"
   env                      = "${var.env}"
   storage_account_name     = "${var.product}shared${var.env}"
   resource_group_name      = "${azurerm_resource_group.rg.name}"
