@@ -1,12 +1,3 @@
-terraform {
-  required_providers {
-    azuread = {
-      source  = "hashicorp/azuread"
-      version = "1.6.0"
-    }
-  }
-}
- 
 locals {
   tags = "${merge(
     var.common_tags,
