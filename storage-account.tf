@@ -4,91 +4,77 @@ locals {
   mgmt_network_name    = "core-cftptl-intsvc-vnet"
   mgmt_network_rg_name = "aks-infra-cftptl-intsvc-rg"
 
-  sa_aat_subnets = [
-    data.azurerm_subnet.jenkins_subnet.id,
-    data.azurerm_subnet.aks-00-mgmt.id,
-    data.azurerm_subnet.aks-01-mgmt.id,
-    data.azurerm_subnet.aks-00-infra.id,
-    data.azurerm_subnet.aks-01-infra.id,
-    data.azurerm_subnet.aks-00-preview.id,
-  data.azurerm_subnet.aks-01-preview.id]
+  preview_vnet_name           = "core-preview-vnet"
+  preview_vnet_resource_group = "aks-infra-preview-rg"
+  aks_env                     = var.env == "sandbox" ? "sbox" : var.env
 
-  sa_other_subnets = [
-    data.azurerm_subnet.jenkins_subnet.id,
-    data.azurerm_subnet.aks-00-mgmt.id,
-    data.azurerm_subnet.aks-01-mgmt.id,
-    data.azurerm_subnet.aks-00-infra.id,
-  data.azurerm_subnet.aks-01-infra.id]
+  aat_cft_vnet_name           = "cft-aat-vnet"
+  aat_cft_vnet_resource_group = "cft-aat-network-rg"
 
-  sa_subnets = split(",", var.env == "aat" ? join(",", local.sa_aat_subnets) : join(",", local.sa_other_subnets))
+  app_aks_network_name    = var.env == "sbox" || var.env == "perftest" || var.env == "aat" || var.env == "ithc" ? "cft-${local.aks_env}-vnet" : "core-${local.aks_env}-vnet"
+  app_aks_network_rg_name = var.env == "sbox" || var.env == "perftest" || var.env == "aat" || var.env == "ithc" ? "cft-${local.aks_env}-network-rg" : "aks-infra-${local.aks_env}-rg"
+
+  standard_subnets = [
+    data.azurerm_subnet.jenkins_subnet.id,
+    data.azurerm_subnet.jenkins_aks_00.id,
+    data.azurerm_subnet.jenkins_aks_01.id,
+    data.azurerm_subnet.app_aks_00_subnet.id,
+    data.azurerm_subnet.app_aks_01_subnet.id
+  ]
+
+  preview_subnets = var.env == "aat" ? [data.azurerm_subnet.preview_aks_00_subnet.id, data.azurerm_subnet.preview_aks_01_subnet.id] : []
+  valid_subnets   = concat(local.standard_subnets, local.preview_subnets)
 }
 
-data "azurerm_virtual_network" "mgmt_vnet" {
-  provider            = azurerm.mgmt
-  name                = local.mgmt_network_name
-  resource_group_name = local.mgmt_network_rg_name
+data "azurerm_subnet" "preview_aks_00_subnet" {
+  provider             = azurerm.aks_preview
+  name                 = "aks-00"
+  virtual_network_name = local.preview_vnet_name
+  resource_group_name  = local.preview_vnet_resource_group
+}
+
+data "azurerm_subnet" "preview_aks_01_subnet" {
+  provider             = azurerm.aks_preview
+  name                 = "aks-01"
+  virtual_network_name = local.preview_vnet_name
+  resource_group_name  = local.preview_vnet_resource_group
 }
 
 data "azurerm_subnet" "jenkins_subnet" {
   provider             = azurerm.mgmt
   name                 = "iaas"
-  virtual_network_name = data.azurerm_virtual_network.mgmt_vnet.name
-  resource_group_name  = data.azurerm_virtual_network.mgmt_vnet.resource_group_name
+  virtual_network_name = local.mgmt_network_name
+  resource_group_name  = local.mgmt_network_rg_name
 }
 
-data "azurerm_subnet" "aks-00-mgmt" {
+data "azurerm_subnet" "jenkins_aks_00" {
   provider             = azurerm.mgmt
   name                 = "aks-00"
-  virtual_network_name = data.azurerm_virtual_network.mgmt_vnet.name
-  resource_group_name  = data.azurerm_virtual_network.mgmt_vnet.resource_group_name
+  virtual_network_name = local.mgmt_network_name
+  resource_group_name  = local.mgmt_network_rg_name
 }
 
-data "azurerm_subnet" "aks-01-mgmt" {
+data "azurerm_subnet" "jenkins_aks_01" {
   provider             = azurerm.mgmt
   name                 = "aks-01"
-  virtual_network_name = data.azurerm_virtual_network.mgmt_vnet.name
-  resource_group_name  = data.azurerm_virtual_network.mgmt_vnet.resource_group_name
+  virtual_network_name = local.mgmt_network_name
+  resource_group_name  = local.mgmt_network_rg_name
 }
 
-data "azurerm_virtual_network" "aks_core_vnet" {
-  provider            = azurerm.aks-infra
-  name                = "core-${var.env}-vnet"
-  resource_group_name = "aks-infra-${var.env}-rg"
-}
-
-data "azurerm_subnet" "aks-00-infra" {
-  provider             = azurerm.aks-infra
+data "azurerm_subnet" "app_aks_00_subnet" {
+  provider             = azurerm.aks
   name                 = "aks-00"
-  virtual_network_name = data.azurerm_virtual_network.aks_core_vnet.name
-  resource_group_name  = data.azurerm_virtual_network.aks_core_vnet.resource_group_name
+  virtual_network_name = local.app_aks_network_name
+  resource_group_name  = local.app_aks_network_rg_name
 }
 
-data "azurerm_subnet" "aks-01-infra" {
-  provider             = azurerm.aks-infra
+data "azurerm_subnet" "app_aks_01_subnet" {
+  provider             = azurerm.aks
   name                 = "aks-01"
-  virtual_network_name = data.azurerm_virtual_network.aks_core_vnet.name
-  resource_group_name  = data.azurerm_virtual_network.aks_core_vnet.resource_group_name
+  virtual_network_name = local.app_aks_network_name
+  resource_group_name  = local.app_aks_network_rg_name
 }
 
-data "azurerm_virtual_network" "aks_preview_vnet" {
-  provider            = azurerm.aks-preview
-  name                = "core-preview-vnet"
-  resource_group_name = "aks-infra-preview-rg"
-}
-
-data "azurerm_subnet" "aks-00-preview" {
-  provider             = azurerm.aks-preview
-  name                 = "aks-00"
-  virtual_network_name = data.azurerm_virtual_network.aks_preview_vnet.name
-  resource_group_name  = data.azurerm_virtual_network.aks_preview_vnet.resource_group_name
-}
-
-data "azurerm_subnet" "aks-01-preview" {
-  provider             = azurerm.aks-preview
-  name                 = "aks-01"
-  virtual_network_name = data.azurerm_virtual_network.aks_preview_vnet.name
-  resource_group_name  = data.azurerm_virtual_network.aks_preview_vnet.resource_group_name
-}
 
 // Shared Storage Account
 module "storage_account" {
@@ -104,7 +90,7 @@ module "storage_account" {
 
   enable_https_traffic_only = true
 
-  sa_subnets = local.sa_subnets
+  sa_subnets = local.valid_subnets
 
   enable_data_protection = var.ccd_storage_account_enable_data_protection
 
@@ -171,7 +157,7 @@ module "dm_store_storage_account" {
 
   enable_https_traffic_only = true
 
-  sa_subnets = local.sa_subnets
+  sa_subnets = local.valid_subnets
 
   enable_data_protection = var.dmstore_storage_account_enable_data_protection
 
