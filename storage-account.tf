@@ -27,14 +27,14 @@ locals {
 }
 
 data "azurerm_subnet" "preview_aks_00_subnet" {
-  provider             = azurerm.aks_preview
+  provider             = azurerm.aks-preview
   name                 = "aks-00"
   virtual_network_name = local.preview_vnet_name
   resource_group_name  = local.preview_vnet_resource_group
 }
 
 data "azurerm_subnet" "preview_aks_01_subnet" {
-  provider             = azurerm.aks_preview
+  provider             = azurerm.aks-preview
   name                 = "aks-01"
   virtual_network_name = local.preview_vnet_name
   resource_group_name  = local.preview_vnet_resource_group
@@ -62,14 +62,14 @@ data "azurerm_subnet" "jenkins_aks_01" {
 }
 
 data "azurerm_subnet" "app_aks_00_subnet" {
-  provider             = azurerm.aks
+  provider             = azurerm.aks-infra
   name                 = "aks-00"
   virtual_network_name = local.app_aks_network_name
   resource_group_name  = local.app_aks_network_rg_name
 }
 
 data "azurerm_subnet" "app_aks_01_subnet" {
-  provider             = azurerm.aks
+  provider             = azurerm.aks-infra
   name                 = "aks-01"
   virtual_network_name = local.app_aks_network_name
   resource_group_name  = local.app_aks_network_rg_name
