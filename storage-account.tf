@@ -4,6 +4,9 @@ locals {
   mgmt_network_name    = "core-cftptl-intsvc-vnet"
   mgmt_network_rg_name = "aks-infra-cftptl-intsvc-rg"
 
+  app_aks_network_name    = var.env == "ithc" ? "cft-${var.env}-vnet" : "core-${var.env}-vnet"
+  app_aks_network_rg_name = var.env == "ithc" ? "cft-${var.env}-network-rg" : "aks-infra-${var.env}-rg"
+  
   sa_aat_subnets = [
     data.azurerm_subnet.jenkins_subnet.id,
     data.azurerm_subnet.aks-00-mgmt.id,
@@ -52,8 +55,8 @@ data "azurerm_subnet" "aks-01-mgmt" {
 
 data "azurerm_virtual_network" "aks_core_vnet" {
   provider            = azurerm.aks-infra
-  name                = "core-${var.env}-vnet"
-  resource_group_name = "aks-infra-${var.env}-rg"
+  name                = local.app_aks_network_name
+  resource_group_name = local.app_aks_network_rg_name
 }
 
 data "azurerm_subnet" "aks-00-infra" {
