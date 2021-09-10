@@ -3,14 +3,14 @@ provider "azurerm" {
 }
 
 provider "azurerm" {
-  alias           = "aks-infra"
+  alias           = "aks"
   subscription_id = var.aks_subscription_id
   features {}
   skip_provider_registration = true
 }
 
 provider "azurerm" {
-  alias           = "aks-preview"
+  alias           = "aks_preview"
   subscription_id = "8b6ea922-0862-443e-af15-6056e1c9b9a4"
   features {}
 }
@@ -31,7 +31,7 @@ terraform {
       source  = "hashicorp/azurerm"
       version = "~> 2.70.0" # AzureRM provider version
     }
-     azuread = {
+    azuread = {
       source  = "hashicorp/azuread"
       version = "1.6.0"
     }
