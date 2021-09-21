@@ -39,5 +39,5 @@ terraform {
 }
 
 provider "azuread" {
-  # Configuration options
+  features {}
 }
