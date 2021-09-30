@@ -1,4 +1,3 @@
-
 locals {
   tags = "${merge(
     var.common_tags,
@@ -12,7 +11,7 @@ locals {
 // Shared Resource Group
 resource "azurerm_resource_group" "rg" {
   name     = "${var.product}-shared-${var.env}"
-  location = "${var.location}"
+  location = var.location
 
-  tags = "${local.tags}"
+  tags = local.tags
 }
