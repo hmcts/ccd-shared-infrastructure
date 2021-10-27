@@ -1,12 +1,12 @@
 //SHARED VARIABLES
 variable "product" {
-  type = string
+  type        = string
   description = "The name of your application"
-  default = "ccd"
+  default     = "ccd"
 }
 
 variable "env" {
-  type = string
+  type        = string
   description = "The deployment environment (sandbox, aat, prod etc..)"
 }
 
@@ -15,9 +15,9 @@ variable "subscription" {
 }
 
 variable "location" {
-  type    = string
+  type        = string
   description = "The location where you would like to deploy your infrastructure"
-  default = "UK South"
+  default     = "UK South"
 }
 
 variable "tenant_id" {
@@ -29,21 +29,21 @@ variable "jenkins_AAD_objectId" {
 }
 
 variable "application_type" {
-  type = string
-  default = "web"
+  type        = string
+  default     = "web"
   description = "Type of Application Insights (Web/Other)"
 }
 
 variable "ccd_storage_account_enable_data_protection" {
-  type = bool
+  type        = bool
   description = "(Optional) Boolean flag which controls if Data Protection are enabled for Blob storage, see https://docs.microsoft.com/en-us/azure/storage/blobs/versioning-overview for more information."
-  default = false
+  default     = false
 }
 
 variable "dmstore_storage_account_enable_data_protection" {
-  type = bool
+  type        = bool
   description = "(Optional) Boolean flag which controls if Data Protection are enabled for Blob storage, see https://docs.microsoft.com/en-us/azure/storage/blobs/versioning-overview for more information."
-  default = false
+  default     = false
 }
 
 // TAG SPECIFIC VARIABLES
@@ -68,7 +68,11 @@ variable "managed_identity_object_id" {
 }
 
 variable "sku" {
-  type = "string"
-  default = "Standard"
+  type        = string
+  default     = "Standard"
   description = "SKU type(Basic, Standard and Premium)"
 }
+
+variable "mgmt_subscription_id" {}
+variable "aks_subscription_id" {}
+
