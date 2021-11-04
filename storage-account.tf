@@ -11,8 +11,8 @@ locals {
   aat_cft_vnet_name           = "cft-aat-vnet"
   aat_cft_vnet_resource_group = "cft-aat-network-rg"
 
-  app_aks_network_name    = var.env == "sbox" || var.env == "perftest" || var.env == "aat" || var.env == "ithc" ? "cft-${local.aks_env}-vnet" : "core-${local.aks_env}-vnet"
-  app_aks_network_rg_name = var.env == "sbox" || var.env == "perftest" || var.env == "aat" || var.env == "ithc" ? "cft-${local.aks_env}-network-rg" : "aks-infra-${local.aks_env}-rg"
+  app_aks_network_name    = var.env == "sbox" || var.env == "perftest" || var.env == "aat" || var.env == "ithc" || var.env == "preview" ? "cft-${local.aks_env}-vnet" : "core-${local.aks_env}-vnet"
+  app_aks_network_rg_name = var.env == "sbox" || var.env == "perftest" || var.env == "aat" || var.env == "ithc" || var.env == "preview" ? "cft-${local.aks_env}-network-rg" : "aks-infra-${local.aks_env}-rg"
 
   standard_subnets = [
     data.azurerm_subnet.jenkins_subnet.id,
@@ -92,7 +92,8 @@ module "storage_account" {
 
   sa_subnets = local.valid_subnets
 
-  enable_data_protection = var.ccd_storage_account_enable_data_protection
+#   Temporarily disabling and relying on Portal settings, to enable successful TF apply https://tools.hmcts.net/confluence/display/CCD/CCD+Storage+Accounts+Update+Blocked+-+Program+Decision+Required
+#   enable_data_protection = var.ccd_storage_account_enable_data_protection
 
   // Tags
   common_tags  = local.tags
@@ -159,7 +160,8 @@ module "dm_store_storage_account" {
 
   sa_subnets = local.valid_subnets
 
-  enable_data_protection = var.dmstore_storage_account_enable_data_protection
+#   Temporarily disabling and relying on Portal settings, to enable successful TF apply https://tools.hmcts.net/confluence/display/CCD/CCD+Storage+Accounts+Update+Blocked+-+Program+Decision+Required
+#   enable_data_protection = var.ccd_storage_account_enable_data_protection
 
   // Tags
   common_tags  = local.tags
