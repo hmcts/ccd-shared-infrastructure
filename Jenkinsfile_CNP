@@ -2,14 +2,4 @@
 //noinspection GroovyUnusedAssignment
 @Library("Infrastructure") _
 
-withInfraPipeline('ccd') {
-    onMaster {
-        enableSlackNotifications('#ccd-master-builds')
-    }
-    onDemo {
-        enableSlackNotifications('#ccd-demo-builds')
-    }
-    onPR {
-        enableSlackNotifications('#ccd-pr-builds')
-    }
-}
+
