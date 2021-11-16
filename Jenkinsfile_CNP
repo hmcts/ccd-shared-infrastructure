@@ -2,6 +2,8 @@
 //noinspection GroovyUnusedAssignment
 @Library("Infrastructure") _
 
+def branchesToSync = ['demo', 'ithc', 'perftest']
+
 withInfraPipeline('ccd') {
     onMaster {
         enableSlackNotifications('#ccd-master-builds')
@@ -12,4 +14,5 @@ withInfraPipeline('ccd') {
     onPR {
         enableSlackNotifications('#ccd-pr-builds')
     }
+    syncBranchesWithMaster(branchesToSync)
 }
