@@ -11,8 +11,11 @@ locals {
   aat_cft_vnet_name           = "cft-aat-vnet"
   aat_cft_vnet_resource_group = "cft-aat-network-rg"
 
-  app_aks_network_name    = var.env == "sbox" || var.env == "perftest" || var.env == "aat" || var.env == "ithc" || var.env == "preview" || var.env == "prod" ? "cft-${local.aks_env}-vnet" : "core-${local.aks_env}-vnet"
-  app_aks_network_rg_name = var.env == "sbox" || var.env == "perftest" || var.env == "aat" || var.env == "ithc" || var.env == "preview" || var.env == "prod" ? "cft-${local.aks_env}-network-rg" : "aks-infra-${local.aks_env}-rg"
+  prod_cft_vnet_name           = "cft-prod-vnet"
+  prod_cft_vnet_resource_group = "cft-prod-network-rg"
+
+  app_aks_network_name    = var.env == "sbox" || var.env == "perftest" || var.env == "aat" || var.env == "ithc" || var.env == "preview" ? "cft-${local.aks_env}-vnet" : "core-${local.aks_env}-vnet"
+  app_aks_network_rg_name = var.env == "sbox" || var.env == "perftest" || var.env == "aat" || var.env == "ithc" || var.env == "preview" ? "cft-${local.aks_env}-network-rg" : "aks-infra-${local.aks_env}-rg"
 
   standard_subnets = [
     data.azurerm_subnet.jenkins_subnet.id,
@@ -22,8 +25,9 @@ locals {
     data.azurerm_subnet.app_aks_01_subnet.id
   ]
 
-  preview_subnets = var.env == "aat" ? [data.azurerm_subnet.preview_aks_00_subnet.id, data.azurerm_subnet.preview_aks_01_subnet.id] : []
-  valid_subnets   = concat(local.standard_subnets, local.preview_subnets)
+  preview_subnets  = var.env == "aat" ? [data.azurerm_subnet.preview_aks_00_subnet.id, data.azurerm_subnet.preview_aks_01_subnet.id] : []
+  cft_prod_subnets = var.env == "prod" ? [data.azurerm_subnet.prod_aks_00_subnet.id, data.azurerm_subnet.prod_aks_01_subnet.id] : []
+  valid_subnets    = concat(local.standard_subnets, local.preview_subnets, local.cft_prod_subnets)
 }
 
 data "azurerm_subnet" "preview_aks_00_subnet" {
@@ -38,6 +42,20 @@ data "azurerm_subnet" "preview_aks_01_subnet" {
   name                 = "aks-01"
   virtual_network_name = local.preview_vnet_name
   resource_group_name  = local.preview_vnet_resource_group
+}
+
+data "azurerm_subnet" "prod_aks_00_subnet" {
+  provider             = azurerm.aks-prod
+  name                 = "aks-00"
+  virtual_network_name = local.prod_vnet_name
+  resource_group_name  = local.prod_vnet_resource_group
+}
+
+data "azurerm_subnet" "prod_aks_01_subnet" {
+  provider             = azurerm.aks-prod
+  name                 = "aks-01"
+  virtual_network_name = local.prod_vnet_name
+  resource_group_name  = local.prod_vnet_resource_group
 }
 
 data "azurerm_subnet" "jenkins_subnet" {
@@ -92,8 +110,8 @@ module "storage_account" {
 
   sa_subnets = local.valid_subnets
 
-#   Temporarily disabling and relying on Portal settings, to enable successful TF apply https://tools.hmcts.net/confluence/display/CCD/CCD+Storage+Accounts+Update+Blocked+-+Program+Decision+Required
-#   enable_data_protection = var.ccd_storage_account_enable_data_protection
+  #   Temporarily disabling and relying on Portal settings, to enable successful TF apply https://tools.hmcts.net/confluence/display/CCD/CCD+Storage+Accounts+Update+Blocked+-+Program+Decision+Required
+  #   enable_data_protection = var.ccd_storage_account_enable_data_protection
 
   // Tags
   common_tags  = local.tags
@@ -160,8 +178,8 @@ module "dm_store_storage_account" {
 
   sa_subnets = local.valid_subnets
 
-#   Temporarily disabling and relying on Portal settings, to enable successful TF apply https://tools.hmcts.net/confluence/display/CCD/CCD+Storage+Accounts+Update+Blocked+-+Program+Decision+Required
-#   enable_data_protection = var.ccd_storage_account_enable_data_protection
+  #   Temporarily disabling and relying on Portal settings, to enable successful TF apply https://tools.hmcts.net/confluence/display/CCD/CCD+Storage+Accounts+Update+Blocked+-+Program+Decision+Required
+  #   enable_data_protection = var.ccd_storage_account_enable_data_protection
 
   // Tags
   common_tags  = local.tags
