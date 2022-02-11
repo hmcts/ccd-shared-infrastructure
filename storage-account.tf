@@ -47,15 +47,15 @@ data "azurerm_subnet" "preview_aks_01_subnet" {
 data "azurerm_subnet" "prod_aks_00_subnet" {
   provider             = azurerm.aks-prod
   name                 = "aks-00"
-  virtual_network_name = local.prod_vnet_name
-  resource_group_name  = local.prod_vnet_resource_group
+  virtual_network_name = local.prod_cft_vnet_name
+  resource_group_name  = local.prod_cft_vnet_resource_group
 }
 
 data "azurerm_subnet" "prod_aks_01_subnet" {
   provider             = azurerm.aks-prod
   name                 = "aks-01"
-  virtual_network_name = local.prod_vnet_name
-  resource_group_name  = local.prod_vnet_resource_group
+  virtual_network_name = local.prod_cft_vnet_name
+  resource_group_name  = local.prod_cft_vnet_resource_group
 }
 
 data "azurerm_subnet" "jenkins_subnet" {
