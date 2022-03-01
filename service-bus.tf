@@ -32,7 +32,7 @@ module "servicebus-namespace-prem" {
   env                 = var.env
   common_tags         = local.tags
   sku                 = "Premium"
-  zoneRedundant       = (var.sku != "Premium" ? "false" : "true")
+  zoneRedundant       = "true"
 }
 
 module "events-topic-prem" {
