@@ -21,3 +21,23 @@ module "events-topic" {
   namespace_name      = module.servicebus-namespace.name
   resource_group_name = local.resource_group_name
 }
+
+# To Test Zone Redundancy
+
+module "servicebus-namespace-prem" {
+  source              = "git::https://github.com/hmcts/terraform-module-servicebus-namespace?ref=master"
+  name                = "${local.servicebus_namespace_name}-prem"
+  location            = var.location
+  resource_group_name = azurerm_resource_group.rg.name
+  env                 = var.env
+  common_tags         = local.tags
+  sku                 = "Premium"
+  zoneRedundant       = (var.sku != "Premium" ? "false" : "true")
+}
+
+module "events-topic-prem" {
+  source              = "git::https://github.com/hmcts/terraform-module-servicebus-topic?ref=master"
+  name                = "${local.events_topic_name}-prem"
+  namespace_name      = module.servicebus-namespace-prem.name
+  resource_group_name = local.resource_group_name
+}
