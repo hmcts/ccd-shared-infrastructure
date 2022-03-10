@@ -1,8 +1,8 @@
 // Shared and specialised Storage Accounts
 
 locals {
-  mgmt_network_name    = "core-cftptl-intsvc-vnet"
-  mgmt_network_rg_name = "aks-infra-cftptl-intsvc-rg"
+  mgmt_network_name = "cft-ptl-vnet"
+  mgmt_network_rg_name = "cft-ptl-network-rg"
 
   preview_vnet_name           = "core-preview-vnet"
   preview_vnet_resource_group = "aks-infra-preview-rg"
