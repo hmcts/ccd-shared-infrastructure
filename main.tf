@@ -1,11 +1,11 @@
 locals {
-  tags = "${merge(
+  tags = merge(
     var.common_tags,
     map(
       "Team Contact", var.team_contact,
       "Destroy Me", var.destroy_me
     )
-  )}"
+  )
 }
 
 // Shared Resource Group
