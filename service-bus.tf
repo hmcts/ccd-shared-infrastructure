@@ -12,7 +12,7 @@ module "servicebus-namespace" {
   env                 = var.env
   common_tags         = local.tags
   sku                 = var.sku
-  zoneRedundant       = (var.sku != "Premium" ? "false" : "true")
+  zone_redundant       = (var.sku != "Premium" ? "false" : "true")
 }
 
 module "events-topic" {
