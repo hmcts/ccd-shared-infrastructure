@@ -5,6 +5,9 @@ locals {
 }
 
 module "servicebus-namespace" {
+  providers = {
+    azurerm.private-endpoint = azurerm.aks-infra
+  }
   source              = "git@github.com:hmcts/terraform-module-servicebus-namespace?ref=master"
   name                = local.servicebus_namespace_name
   location            = var.location
@@ -12,7 +15,7 @@ module "servicebus-namespace" {
   env                 = var.env
   common_tags         = local.tags
   sku                 = var.sku
-  zone_redundant       = (var.sku != "Premium" ? "false" : "true")
+  zone_redundant      = (var.sku != "Premium" ? "false" : "true")
 }
 
 module "events-topic" {
