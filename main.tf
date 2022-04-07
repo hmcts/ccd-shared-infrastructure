@@ -1,10 +1,10 @@
 locals {
   tags = "${merge(
     var.common_tags,
-    map(
-      "Team Contact", var.team_contact,
-      "Destroy Me", var.destroy_me
-    )
+    tomap({
+      "Team Contact" = var.team_contact
+      "Destroy Me" = var.destroy_me
+    })
   )}"
 }
 
