@@ -87,7 +87,6 @@ module "storage_account" {
   account_tier             = "Standard"
   account_replication_type = "ZRS"
   access_tier              = "Hot"
-  allow_nested_items_to_be_public = false
 
   enable_https_traffic_only = true
 
@@ -156,7 +155,6 @@ module "dm_store_storage_account" {
   account_tier             = "Standard"
   account_replication_type = "ZRS"
   access_tier              = "Hot"
-  allow_nested_items_to_be_public = false
 
   enable_https_traffic_only = true
 
