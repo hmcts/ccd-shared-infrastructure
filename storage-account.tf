@@ -14,6 +14,8 @@ locals {
   app_aks_network_name    = var.env == "sbox" || var.env == "perftest" || var.env == "aat" || var.env == "ithc" || var.env == "preview" ? "cft-${local.aks_env}-vnet" : "core-${local.aks_env}-vnet"
   app_aks_network_rg_name = var.env == "sbox" || var.env == "perftest" || var.env == "aat" || var.env == "ithc" || var.env == "preview" ? "cft-${local.aks_env}-network-rg" : "aks-infra-${local.aks_env}-rg"
 
+  dmstoredoc_storage_replication_type = var.env == "aat" ? "LRS" : "ZRS"
+
   standard_subnets = [
     data.azurerm_subnet.jenkins_subnet.id,
     data.azurerm_subnet.jenkins_aks_00.id,
@@ -153,7 +155,7 @@ module "dm_store_storage_account" {
   location                 = var.location
   account_kind             = "StorageV2"
   account_tier             = "Standard"
-  account_replication_type = "ZRS"
+  account_replication_type = local.dmstoredoc_storage_replication_type
   access_tier              = "Hot"
 
   enable_https_traffic_only = true
