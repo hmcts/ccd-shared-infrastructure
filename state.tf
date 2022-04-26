@@ -22,14 +22,14 @@ provider "azurerm" {
 }
 
 terraform {
-  required_version = ">= 0.14" # Terraform client version
+  required_version = ">= 1.1.7" # Terraform client version
 
   backend "azurerm" {}
 
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "~> 2.99.0" # AzureRM provider version
+      version = "~> 3.2.0" # AzureRM provider version
     }
     azuread = {
       source  = "hashicorp/azuread"
