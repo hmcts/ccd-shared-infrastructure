@@ -1,5 +1,5 @@
 locals {
-  tags = "${merge(
+  tags = merge(
     var.common_tags,
     tomap({
       "Team Contact" = var.team_contact

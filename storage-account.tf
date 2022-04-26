@@ -92,8 +92,8 @@ module "storage_account" {
 
   sa_subnets = local.valid_subnets
 
-#   Temporarily disabling and relying on Portal settings, to enable successful TF apply https://tools.hmcts.net/confluence/display/CCD/CCD+Storage+Accounts+Update+Blocked+-+Program+Decision+Required
-#   enable_data_protection = var.ccd_storage_account_enable_data_protection
+  #   Temporarily disabling and relying on Portal settings, to enable successful TF apply https://tools.hmcts.net/confluence/display/CCD/CCD+Storage+Accounts+Update+Blocked+-+Program+Decision+Required
+  #   enable_data_protection = var.ccd_storage_account_enable_data_protection
 
   // Tags
   common_tags  = local.tags
@@ -160,8 +160,8 @@ module "dm_store_storage_account" {
 
   sa_subnets = local.valid_subnets
 
-#   Temporarily disabling and relying on Portal settings, to enable successful TF apply https://tools.hmcts.net/confluence/display/CCD/CCD+Storage+Accounts+Update+Blocked+-+Program+Decision+Required
-#   enable_data_protection = var.ccd_storage_account_enable_data_protection
+  #   Temporarily disabling and relying on Portal settings, to enable successful TF apply https://tools.hmcts.net/confluence/display/CCD/CCD+Storage+Accounts+Update+Blocked+-+Program+Decision+Required
+  #   enable_data_protection = var.ccd_storage_account_enable_data_protection
 
   // Tags
   common_tags  = local.tags
