@@ -15,7 +15,6 @@ locals {
   app_aks_network_rg_name = var.env == "sbox" || var.env == "perftest" || var.env == "aat" || var.env == "ithc" || var.env == "preview" ? "cft-${local.aks_env}-network-rg" : "aks-infra-${local.aks_env}-rg"
 
   dmstoredoc_storage_replication_type = var.env == "aat" ? "LRS" : "ZRS"
-  shared_storage_replication_type = var.product == "dm" && var.env == "demo" || var.env == "prod" ? "LRS" : "ZRS"
 
   standard_subnets = [
     data.azurerm_subnet.jenkins_subnet.id,
@@ -88,7 +87,7 @@ module "storage_account" {
   location                 = var.location
   account_kind             = "StorageV2"
   account_tier             = "Standard"
-  account_replication_type = local.shared_storage_replication_type
+  account_replication_type = "ZRS"
   access_tier              = "Hot"
 
   enable_https_traffic_only = true
