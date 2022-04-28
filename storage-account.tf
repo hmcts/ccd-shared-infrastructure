@@ -24,6 +24,8 @@ locals {
 
   preview_subnets = var.env == "aat" ? [data.azurerm_subnet.preview_aks_00_subnet.id, data.azurerm_subnet.preview_aks_01_subnet.id] : []
   valid_subnets   = concat(local.standard_subnets, local.preview_subnets)
+  
+  dmstoredoc_storage_replication_type = var.env == "aat" ? "LRS" : "ZRS"
 }
 
 data "azurerm_subnet" "preview_aks_00_subnet" {
@@ -85,15 +87,15 @@ module "storage_account" {
   location                 = var.location
   account_kind             = "StorageV2"
   account_tier             = "Standard"
-  account_replication_type = "LRS"
+  account_replication_type = "ZRS"
   access_tier              = "Hot"
 
   enable_https_traffic_only = true
 
   sa_subnets = local.valid_subnets
 
-#   Temporarily disabling and relying on Portal settings, to enable successful TF apply https://tools.hmcts.net/confluence/display/CCD/CCD+Storage+Accounts+Update+Blocked+-+Program+Decision+Required
-#   enable_data_protection = var.ccd_storage_account_enable_data_protection
+  #   Temporarily disabling and relying on Portal settings, to enable successful TF apply https://tools.hmcts.net/confluence/display/CCD/CCD+Storage+Accounts+Update+Blocked+-+Program+Decision+Required
+  #   enable_data_protection = var.ccd_storage_account_enable_data_protection
 
   // Tags
   common_tags  = local.tags
@@ -153,15 +155,15 @@ module "dm_store_storage_account" {
   location                 = var.location
   account_kind             = "StorageV2"
   account_tier             = "Standard"
-  account_replication_type = "LRS"
+  account_replication_type = local.dmstoredoc_storage_replication_type
   access_tier              = "Hot"
 
   enable_https_traffic_only = true
 
   sa_subnets = local.valid_subnets
 
-#   Temporarily disabling and relying on Portal settings, to enable successful TF apply https://tools.hmcts.net/confluence/display/CCD/CCD+Storage+Accounts+Update+Blocked+-+Program+Decision+Required
-#   enable_data_protection = var.ccd_storage_account_enable_data_protection
+  #   Temporarily disabling and relying on Portal settings, to enable successful TF apply https://tools.hmcts.net/confluence/display/CCD/CCD+Storage+Accounts+Update+Blocked+-+Program+Decision+Required
+  #   enable_data_protection = var.ccd_storage_account_enable_data_protection
 
   // Tags
   common_tags  = local.tags

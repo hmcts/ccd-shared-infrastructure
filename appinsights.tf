@@ -15,7 +15,8 @@ resource "azurerm_application_insights" "appinsights" {
 }
 
 output "appInsightsInstrumentationKey" {
-  value = azurerm_application_insights.appinsights.instrumentation_key
+  sensitive = true
+  value     = azurerm_application_insights.appinsights.instrumentation_key
 }
 
 resource "azurerm_key_vault_secret" "app_insights_key" {

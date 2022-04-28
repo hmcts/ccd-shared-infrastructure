@@ -48,7 +48,7 @@ variable "dmstore_storage_account_enable_data_protection" {
 
 // TAG SPECIFIC VARIABLES
 variable "common_tags" {
-  type = map
+  type = map(any)
 }
 
 variable "team_contact" {
