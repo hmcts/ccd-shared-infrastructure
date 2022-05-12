@@ -19,7 +19,7 @@ module "servicebus-namespace" {
 }
 
 module "events-topic" {
-  source              = "git@github.com:hmcts/terraform-module-servicebus-topic?ref=DTSPO-6371_azurerm_upgrade"
+  source              = "git@github.com:hmcts/terraform-module-servicebus-topic?ref=master"
   name                = local.events_topic_name
   namespace_name      = module.servicebus-namespace.name
   resource_group_name = local.resource_group_name
