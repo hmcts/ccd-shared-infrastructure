@@ -33,10 +33,21 @@ resource "azurerm_key_vault_secret" "ccd-case-disposer-s2s-secret" {
   value        = data.azurerm_key_vault_secret.ccd_case_disposer_s2s_key.value
   key_vault_id = module.vault.key_vault_id
 }  
-  
+
 resource "azurerm_key_vault_secret" "ccd_gw_s2s_secret" {
   name         = "ccd-gw-s2s-secret"
   value        = data.azurerm_key_vault_secret.ccd_gw_s2s_key.value
+  key_vault_id = module.vault.key_vault_id
+}
+
+data "azurerm_key_vault_secret" "ccd_next_hearing_date_updater_s2s_key" {
+  name         = "microservicekey-ccd-next-hearing-date-updater"
+  key_vault_id = data.azurerm_key_vault.s2s_vault.id
+}
+
+resource "azurerm_key_vault_secret" "ccd-next-hearing-date-updater-s2s-secret" {
+  name         = "ccd-next-hearing-date-updater-s2s-secret"
+  value        = data.azurerm_key_vault_secret.ccd_next_hearing_date_updater_s2s_key.value
   key_vault_id = module.vault.key_vault_id
 }
 
