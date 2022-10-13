@@ -11,10 +11,6 @@ locals {
   app_aks_network_name    = "cft-${local.aks_env}-vnet"
   app_aks_network_rg_name = "cft-${local.aks_env}-network-rg"
 
-  # currently live prod vNet, remove once arm -> terraform migration completed
-  arm_based_prod_network_name = "core-prod-vnet"
-  arm_based_prod_rg_name = "aks-infra-prod-rg"
-
   standard_subnets = [
     data.azurerm_subnet.jenkins_subnet.id,
     data.azurerm_subnet.jenkins_aks_00.id,
