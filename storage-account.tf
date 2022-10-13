@@ -11,10 +11,6 @@ locals {
   app_aks_network_name    = "cft-${local.aks_env}-vnet"
   app_aks_network_rg_name = "cft-${local.aks_env}-network-rg"
 
-  # currently live prod vNet, remove once arm -> terraform migration completed
-  arm_based_prod_network_name = "core-prod-vnet"
-  arm_based_prod_rg_name = "aks-infra-prod-rg"
-
   standard_subnets = [
     data.azurerm_subnet.jenkins_subnet.id,
     data.azurerm_subnet.jenkins_aks_00.id,
@@ -24,8 +20,7 @@ locals {
   ]
 
   preview_subnets = var.env == "aat" ? [data.azurerm_subnet.preview_aks_00_subnet.id, data.azurerm_subnet.preview_aks_01_subnet.id] : []
-  prod_subnets = var.env == "prod" ? [data.azurerm_subnet.prod_aks_00_subnet[0].id, data.azurerm_subnet.prod_aks_01_subnet[0].id] : []
-  valid_subnets   = concat(local.standard_subnets, local.preview_subnets, local.prod_subnets)
+  valid_subnets = concat(local.standard_subnets, local.preview_subnets)
   
   dmstoredoc_storage_replication_type = var.env == "aat" ? "LRS" : "ZRS"
 }
@@ -42,24 +37,6 @@ data "azurerm_subnet" "preview_aks_01_subnet" {
   name                 = "aks-01"
   virtual_network_name = local.preview_vnet_name
   resource_group_name  = local.preview_vnet_resource_group
-}
-
-data "azurerm_subnet" "prod_aks_00_subnet" {
-  count = var.env == "prod" ? 1 : 0
-
-  provider             = azurerm.aks_prod
-  name                 = "aks-00"
-  virtual_network_name = local.arm_based_prod_network_name
-  resource_group_name  = local.arm_based_prod_rg_name
-}
-
-data "azurerm_subnet" "prod_aks_01_subnet" {
-  count = var.env == "prod" ? 1 : 0
-
-  provider             = azurerm.aks_prod
-  name                 = "aks-01"
-  virtual_network_name = local.arm_based_prod_network_name
-  resource_group_name  = local.arm_based_prod_rg_name
 }
 
 data "azurerm_subnet" "jenkins_subnet" {
