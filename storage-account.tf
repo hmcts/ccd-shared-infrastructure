@@ -163,9 +163,9 @@ module "dm_store_storage_account" {
   #   enable_data_protection = var.ccd_storage_account_enable_data_protection
 
   // Tags
-  common_tags  = local.tags
-  team_contact = var.team_contact
-  destroy_me   = var.destroy_me
+  common_tags  = local.em_tags
+  team_contact = var.em_team_contact
+  destroy_me   = var.em_destroy_me
 }
 
 
