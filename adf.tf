@@ -1,5 +1,5 @@
 module "adf" {
-  source                                     = "git@github.com:hmcts/cnp-module-adf?ref=master"
+  source                                     = "git@github.com:hmcts/cnp-module-adf?ref=DTSPO-8276/codeowners"
   data_factory_name_resource_group_name      = azurerm_resource_group.rg.name
   data_factory_name                          = "${var.product}shared${var.env}"
   input_storage_account_resource_group_name  = azurerm_resource_group.rg.name
