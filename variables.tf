@@ -69,7 +69,7 @@ variable "managed_identity_object_id" {
 
 variable "sku" {
   type        = string
-  default     = "Standard"
+  default     = "Premium"
   description = "SKU type(Basic, Standard and Premium)"
 }
 
