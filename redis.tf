@@ -11,14 +11,13 @@ data "azurerm_key_vault" "shared" {
 
 resource "azurerm_key_vault_secret" "redis_connection_string" {
   name         = "ccd-redis-password"
-  value        = module.redis-activity-service.access_key
+  value        = module.redis-ccd.access_key
   key_vault_id = data.azurerm_key_vault.shared.id
 }
 
-module "redis-activity-service" {
+module "redis-ccd" {
   source      = "git@github.com:hmcts/cnp-module-redis?ref=master"
-  product     = "${var.product}-activity-service"
-  location    = var.location
+  product     = "${var.product}-redis"  location    = var.location
   env         = "${var.env}"
   subnetid    = "${data.azurerm_subnet.core_infra_redis_subnet.id}"
   common_tags = "${var.common_tags}"
