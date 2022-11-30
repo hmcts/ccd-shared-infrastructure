@@ -17,7 +17,7 @@ resource "azurerm_key_vault_secret" "redis_connection_string" {
 
 module "redis-ccd" {
   source      = "git@github.com:hmcts/cnp-module-redis?ref=master"
-  product     = "${var.product}-redis"
+  product     = "${var.product}"
   location    = var.location
   env         = "${var.env}"
   subnetid    = "${data.azurerm_subnet.core_infra_redis_subnet.id}"
