@@ -4,6 +4,12 @@ data "azurerm_subnet" "core_infra_redis_subnet" {
   resource_group_name  = "core-infra-${var.env}"
 }
 
+data "azurerm_subnet" "bastion-nonprod_redis_subnet" {
+  name                 = "bastion-nonprod-subnet-1-${var.env}"
+  virtual_network_name = "bastion-nonprod-vnet-${var.env}"
+  resource_group_name  = "bastion-nonprod-${var.env}"
+}
+
 data "azurerm_key_vault" "shared" {
   name                = "ccd-${var.env}"
   resource_group_name = "ccd-shared-${var.env}"
