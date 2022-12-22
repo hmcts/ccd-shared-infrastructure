@@ -5,9 +5,9 @@ data "azurerm_subnet" "core_infra_redis_subnet" {
 }
 
 data "azurerm_subnet" "bastion-nonprod_redis_subnet" {
-  name                 = "bastion-nonprod-subnet-1-${var.env}"
-  virtual_network_name = "bastion-nonprod-vnet-${var.env}"
-  resource_group_name  = "bastion-nonprod-${var.env}"
+  name                 = "bastion-nonprod-vnet-redis"
+  virtual_network_name = "bastion-nonprod-vnet"
+  resource_group_name  = "bastion-nonprod-rg"
 }
 
 data "azurerm_key_vault" "shared" {
