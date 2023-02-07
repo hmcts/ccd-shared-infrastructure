@@ -4,8 +4,8 @@ locals {
   mgmt_network_name    = "cft-ptl-vnet"
   mgmt_network_rg_name = "cft-ptl-network-rg"
 
-  preview_vnet_name           = "core-preview-vnet"
-  preview_vnet_resource_group = "aks-infra-preview-rg"
+  preview_vnet_name           = "cft-preview-vnet"
+  preview_vnet_resource_group = "cft-preview-network-rg"
   aks_env                     = var.env == "sandbox" ? "sbox" : var.env
 
   app_aks_network_name    = "cft-${local.aks_env}-vnet"
