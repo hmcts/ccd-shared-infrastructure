@@ -22,10 +22,14 @@ resource "azurerm_key_vault_secret" "redis_connection_string" {
 }
 
 module "redis-ccd" {
-  source      = "git@github.com:hmcts/cnp-module-redis?ref=master"
-  product     = "${var.product}-redis"
-  location    = var.location
-  env         = "${var.env}"
-  subnetid    = "${data.azurerm_subnet.core_infra_redis_subnet.id}"
-  common_tags = "${var.common_tags}"
+  source                        = "git@github.com:hmcts/cnp-module-redis?ref=master"
+  product                       = "${var.product}-redis"
+  location                      = var.location
+  env                           = "${var.env}"
+  subnetid                      = "${data.azurerm_subnet.core_infra_redis_subnet.id}"
+  common_tags                   = "${var.common_tags}"
+  redis_version                 = "6"
+  business_area                 = "cft" # cft or sds
+  private_endpoint_enabled      = true
+  public_network_access_enabled = false
 }
