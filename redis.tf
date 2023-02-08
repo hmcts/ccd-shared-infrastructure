@@ -22,7 +22,7 @@ resource "azurerm_key_vault_secret" "redis_connection_string" {
 }
 
 module "redis-ccd" {
-  source                        = "git@github.com:hmcts/cnp-module-redis?ref=master"
+  source                        = "git@github.com:hmcts/cnp-module-redis?ref=add-redis-version-flag"
   product                       = "${var.product}-redis"
   location                      = var.location
   env                           = "${var.env}"
