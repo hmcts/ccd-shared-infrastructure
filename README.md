@@ -1,7 +1,6 @@
 # ccd-shared-infrastructure
 
-This module sets up the shared infrastructure for CCD.  
-**Note:** The environment specific branches demo, ithc and perftest will be automatically synced with master branch. Changes commited to master are reflected in other branches - with a subsequent branch build per environment. If per branch specific changes are required this sync can be overridden in Jenkinsfile_CNP.
+This module sets up the shared infrastructure for CCD.
 
 ## Variables
 

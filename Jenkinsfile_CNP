@@ -2,7 +2,7 @@
 //noinspection GroovyUnusedAssignment
 @Library("Infrastructure") _
 
-def branchesToSync = ['ithc']
+def branchesToSync = ['demo', 'ithc', 'perftest']
 
 withInfraPipeline('ccd') {
     onMaster {
