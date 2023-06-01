@@ -1,4 +1,12 @@
 {
-  "enabledManagers": ["terraform", "terraform-version"],
-  "labels": ["dependencies"]
+  "enabledManagers": [
+    "terraform",
+    "terraform-version"
+  ],
+  "labels": [
+    "dependencies"
+  ],
+  "extends": [
+    "local>hmcts/.github:renovate-config"
+  ]
 }
