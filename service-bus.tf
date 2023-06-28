@@ -24,3 +24,9 @@ module "events-topic" {
   namespace_name      = module.servicebus-namespace.name
   resource_group_name = local.resource_group_name
 }
+
+resource "azurerm_key_vault_secret" "servicebus_primary_connection_string" {
+  name         = "ccd-servicebus-connection-string"
+  value        = module.servicebus-namespace.primary_send_and_listen_connection_string
+  key_vault_id = module.vault.key_vault_id
+}
