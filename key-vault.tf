@@ -10,7 +10,7 @@ module "vault" {
 
   common_tags = local.tags
 
-  managed_identity_object_id = var.managed_identity_object_id
+  managed_identity_object_ids = var.managed_identity_object_id
   create_managed_identity    = true
 }
 
