@@ -1,5 +1,5 @@
 module "vault" {
-  source              = "git@github.com:hmcts/cnp-module-key-vault?ref=master"
+  source              = "git@github.com:hmcts/cnp-module-key-vault?ref=DTSPO-13637"
   name                = "ccd-${var.env}"
   product             = var.product
   env                 = var.env
@@ -10,7 +10,8 @@ module "vault" {
 
   common_tags = local.tags
 
-  managed_identity_object_ids = var.managed_identity_object_id
+  managed_identity_object_id = var.managed_identity_object_id
+  product_name               = var.product_name
   create_managed_identity    = true
 }
 
