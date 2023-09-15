@@ -5,6 +5,11 @@ variable "product" {
   default     = "ccd"
 }
 
+variable "additional_managed_identities_access" {
+  type        = list(string)
+  description = "The name of your application"
+}
+
 variable "env" {
   type        = string
   description = "The deployment environment (sandbox, aat, prod etc..)"
