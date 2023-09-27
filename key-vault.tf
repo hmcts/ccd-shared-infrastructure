@@ -11,6 +11,7 @@ module "vault" {
   common_tags = local.tags
 
   managed_identity_object_id = var.managed_identity_object_id
+  create_managed_identity    = true
 }
 
 data "azurerm_key_vault" "s2s_vault" {
