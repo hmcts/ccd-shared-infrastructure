@@ -1,8 +1,4 @@
 {
-  "enabledManagers": [
-    "terraform",
-    "terraform-version"
-  ],
   "labels": [
     "dependencies"
   ],
