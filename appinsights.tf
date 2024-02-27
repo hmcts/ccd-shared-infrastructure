@@ -6,7 +6,7 @@ module "application_insights" {
   location            = var.location
   application_type    = var.application_type
   resource_group_name = azurerm_resource_group.rg.name
-
+  daily_data_cap_in_gb = var.app_insights_data_cap
   common_tags = var.common_tags
 }
 
