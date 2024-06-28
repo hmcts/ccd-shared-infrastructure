@@ -20,8 +20,8 @@ locals {
   ]
 
   preview_subnets = var.env == "aat" ? [data.azurerm_subnet.preview_aks_00_subnet.id, data.azurerm_subnet.preview_aks_01_subnet.id] : []
-  valid_subnets = concat(local.standard_subnets, local.preview_subnets)
-  
+  valid_subnets   = concat(local.standard_subnets, local.preview_subnets)
+
   dmstoredoc_storage_replication_type = var.env == "aat" ? "LRS" : "ZRS"
 }
 
