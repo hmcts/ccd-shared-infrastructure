@@ -1,13 +1,13 @@
 module "application_insights" {
   source = "git@github.com:hmcts/terraform-module-application-insights?ref=main"
 
-  env                 = var.env
-  product             = var.product
-  location            = var.location
-  application_type    = var.application_type
-  resource_group_name = azurerm_resource_group.rg.name
+  env                  = var.env
+  product              = var.product
+  location             = var.location
+  application_type     = var.application_type
+  resource_group_name  = azurerm_resource_group.rg.name
   daily_data_cap_in_gb = var.app_insights_data_cap
-  common_tags = var.common_tags
+  common_tags          = var.common_tags
 }
 
 moved {
