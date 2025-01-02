@@ -8,7 +8,7 @@ module "servicebus-namespace" {
   providers = {
     azurerm.private_endpoint = azurerm.aks-infra
   }
-  source              = "git@github.com:hmcts/terraform-module-servicebus-namespace?ref=master"
+  source              = "git@github.com:hmcts/terraform-module-servicebus-namespace?ref=4.x"
   name                = local.servicebus_namespace_name
   location            = var.location
   resource_group_name = azurerm_resource_group.rg.name
@@ -19,7 +19,7 @@ module "servicebus-namespace" {
 }
 
 module "events-topic" {
-  source              = "git@github.com:hmcts/terraform-module-servicebus-topic?ref=master"
+  source              = "git@github.com:hmcts/terraform-module-servicebus-topic?ref=4.x"
   name                = local.events_topic_name
   namespace_name      = module.servicebus-namespace.name
   resource_group_name = local.resource_group_name
