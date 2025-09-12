@@ -1,8 +1,8 @@
 // Shared and specialised Storage Accounts
 
 locals {
-  mgmt_network_name    = "cft-ptl-vnet"
-  mgmt_network_rg_name = "cft-ptl-network-rg"
+  mgmt_network_name    = var.jenkins_subnet_name
+  mgmt_network_rg_name = var.jenkins_subnet_resource_group
 
   preview_vnet_name           = "cft-preview-vnet"
   preview_vnet_resource_group = "cft-preview-network-rg"

@@ -95,3 +95,13 @@ variable "app_insights_data_cap" {
   description = "Number of GBs application insights is allowed to ingest"
   default     = 50
 }
+
+variable "jenkins_subnet_name" {
+  description = "The name of the Jenkins subnet to be additionally allowed access to storage account"
+  default     = "cft-ptl-vnet"
+}
+
+variable "jenkins_subnet_resource_group" {
+  description = "The resource group of the Jenkins subnet to be additionally allowed access to storage account"
+  default     = "cft-ptl-network-rg"
+}
