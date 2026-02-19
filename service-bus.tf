@@ -22,6 +22,10 @@ module "events-topic" {
   name                = local.events_topic_name
   namespace_name      = module.servicebus-namespace.name
   resource_group_name = local.resource_group_name
+  depends_on = [
+    azurerm_resource_group.rg,
+    module.servicebus-namespace
+  ]
 }
 
 resource "azurerm_key_vault_secret" "servicebus_primary_connection_string" {
