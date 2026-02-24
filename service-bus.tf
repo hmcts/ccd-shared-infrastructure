@@ -18,12 +18,16 @@ module "servicebus-namespace" {
 }
 
 module "events-topic" {
+  count               = var.env == "sandbox" ? 0 : 1
   source              = "git@github.com:hmcts/terraform-module-servicebus-topic?ref=4.x"
   name                = local.events_topic_name
   namespace_name      = module.servicebus-namespace.name
   resource_group_name = local.resource_group_name
 }
-
+moved {
+  from = module.events-topic
+  to   = module.events-topic[0]
+}
 resource "azurerm_key_vault_secret" "servicebus_primary_connection_string" {
   name         = "ccd-servicebus-connection-string"
   value        = module.servicebus-namespace.primary_send_and_listen_connection_string
