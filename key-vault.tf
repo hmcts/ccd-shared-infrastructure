@@ -11,6 +11,7 @@ module "vault" {
 
   common_tags = local.tags
 
+  managed_identity_object_ids          = var.env == "aat" ? [data.azurerm_user_assigned_identity.jenkins-preview.principal_id] : []
   additional_managed_identities_access = var.additional_managed_identities_access
   create_managed_identity              = true
 }
@@ -18,6 +19,16 @@ module "vault" {
 data "azurerm_user_assigned_identity" "jenkins" {
   name                = "jenkins-${var.env}-mi"
   resource_group_name = "managed-identities-${var.env}-rg"
+}
+
+data "azurerm_user_assigned_identity" "jenkins-preview" {
+  provider = azurerm.cnp_dev
+
+  # Temporary exception for DTSPO-30107: Civil preview deploys currently read
+  # AAT team secrets because the Jenkins library maps preview vaults to AAT.
+  # Remove once preview secret loading no longer requires AAT vault access.
+  name                = "jenkins-preview-mi"
+  resource_group_name = "managed-identities-preview-rg"
 }
 
 
