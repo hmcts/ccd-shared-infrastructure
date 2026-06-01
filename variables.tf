@@ -52,6 +52,10 @@ variable "dmstore_storage_account_enable_data_protection" {
   default     = false
 }
 
+variable "sampling_percentage" {
+  description = "Specifies the sampling percentage for Application Insights"
+}
+
 // TAG SPECIFIC VARIABLES
 variable "common_tags" {
   type = map(any)
