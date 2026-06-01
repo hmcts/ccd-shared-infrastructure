@@ -53,7 +53,8 @@ variable "dmstore_storage_account_enable_data_protection" {
 }
 
 variable "sampling_percentage" {
-  description = "Specifies the sampling percentage for Application Insights"
+    default     = null
+    description = "Sampling percentage for Application Insights. null uses default value from terraform-module-application-insights."
 }
 
 // TAG SPECIFIC VARIABLES
