@@ -7,7 +7,7 @@ module "application_insights" {
   application_type     = var.application_type
   resource_group_name  = azurerm_resource_group.rg.name
   daily_data_cap_in_gb = var.app_insights_data_cap
-  sampling_percentage = var.sampling_percentage
+  sampling_percentage  = var.sampling_percentage
   common_tags          = var.common_tags
 }
 
