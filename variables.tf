@@ -83,6 +83,12 @@ variable "sku" {
 variable "mgmt_subscription_id" {}
 variable "aks_subscription_id" {}
 
+variable "aks_preview_subscription_id" {
+  type        = string
+  description = "The AKS subscription containing the preview virtual network. Only used by the AAT deployment."
+  default     = null
+}
+
 variable "em_team_contact" {
   type        = string
   description = "The name of your Slack channel people can use to contact your team about your infrastructure"
