@@ -19,7 +19,7 @@ locals {
     data.azurerm_subnet.app_aks_01_subnet.id
   ]
 
-  preview_subnets = var.env == "aat" ? [data.azurerm_subnet.preview_aks_00_subnet.id, data.azurerm_subnet.preview_aks_01_subnet.id] : []
+  preview_subnets = var.env == "aat" ? [data.azurerm_subnet.preview_aks_00_subnet[0].id, data.azurerm_subnet.preview_aks_01_subnet[0].id] : []
   valid_subnets   = concat(local.standard_subnets, local.preview_subnets)
 
   dmstoredoc_storage_replication_type = var.env == "aat" ? "LRS" : "ZRS"
@@ -27,6 +27,7 @@ locals {
 
 data "azurerm_subnet" "preview_aks_00_subnet" {
   provider             = azurerm.aks-preview
+  count                = var.env == "aat" ? 1 : 0
   name                 = "aks-00"
   virtual_network_name = local.preview_vnet_name
   resource_group_name  = local.preview_vnet_resource_group
@@ -34,6 +35,7 @@ data "azurerm_subnet" "preview_aks_00_subnet" {
 
 data "azurerm_subnet" "preview_aks_01_subnet" {
   provider             = azurerm.aks-preview
+  count                = var.env == "aat" ? 1 : 0
   name                 = "aks-01"
   virtual_network_name = local.preview_vnet_name
   resource_group_name  = local.preview_vnet_resource_group
