@@ -11,7 +11,7 @@ module "vault" {
 
   common_tags = local.tags
 
-  grant_preview_jenkins_access = var.env == "aat"
+  grant_preview_jenkins_access         = var.env == "aat"
   additional_managed_identities_access = var.additional_managed_identities_access
   create_managed_identity              = true
 }
